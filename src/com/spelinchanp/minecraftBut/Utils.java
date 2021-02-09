@@ -18,16 +18,8 @@ import org.bukkit.plugin.Plugin;
 public final class Utils {
 	private static Plugin plugin = Bukkit.getPluginManager().getPlugin("MinecraftBut");
 	
-	public static ArrayList<ItemStack> luckyFishingLootTable = new ArrayList<ItemStack>(
-	        Arrays.asList(
-	        		new ItemStack(Material.BOW),
-	        		new ItemStack(Material.ENCHANTED_BOOK),
-	        		new ItemStack(Material.FISHING_ROD),
-	        		new ItemStack(Material.NAME_TAG),
-	        		new ItemStack(Material.NAUTILUS_SHELL),
-	        		new ItemStack(Material.SADDLE)
-	        		));
-	
+	private static Random rand = new Random();
+		
 	/* Function to spawn TNT in a specified location in a specified world
 	 * that damages entities but does not destroy blocks */
 	public static void createTNTnoDestruction(Location loc, World world) {
@@ -59,16 +51,45 @@ public final class Utils {
 	
 	/* Returns a random lucky item based off of fishing luck of the sea 3 loot tables */
 	public static ItemStack getRandomLuckyFishingItem() {
-		ItemStack item = luckyFishingLootTable.get(new Random()
-				.nextInt(luckyFishingLootTable.size()));
+		ItemStack item = LootTablesItems.luckyFishingLootTable
+				.get(
+						rand.nextInt(LootTablesItems.luckyFishingLootTable.size()));
 		
 		// If item is an enchanted book, fishing rod, or bow, 
-		// give it 1 to four random enchants
+		// give it 1 to four3 random enchants
 		// (Create different enchantment tables for the different 
-		if (item.getType() == Material.ENCHANTED_BOOK ||
-			item.getType() == Material.FISHING_ROD ||
-			item.getType() == Material.BOW) {
+		if (item.getType() == Material.ENCHANTED_BOOK) {
+			int numEnchants = rand.nextInt(5);
 			
+			for (int i = 0; i < numEnchants; i++) {
+				Enchantment ench = LootTablesEnchants.luckyFishingBookEnchants
+					.get(rand.nextInt(LootTablesEnchants.luckyFishingBookEnchants.size()));
+				int level = rand.nextInt((LootTablesEnchants.getLuckyFishingMaxLevels(ench)));
+			
+				item.addUnsafeEnchantment(ench, level);
+			}	
+		}
+		else if (item.getType() == Material.BOW) {
+			int numEnchants = rand.nextInt(5);
+			
+			for (int i = 0; i < numEnchants; i++) {
+				Enchantment ench = LootTablesEnchants.luckyFishingBowEnchants
+					.get(rand.nextInt(LootTablesEnchants.luckyFishingBowEnchants.size()));
+				int level = rand.nextInt((LootTablesEnchants.getLuckyFishingMaxLevels(ench)));
+			
+				item.addUnsafeEnchantment(ench, level);
+			}	
+		}
+		else if (item.getType() == Material.FISHING_ROD) {
+			int numEnchants = rand.nextInt(5);
+			
+			for (int i = 0; i < numEnchants; i++) {
+				Enchantment ench = LootTablesEnchants.luckyFishingRodEnchants
+					.get(rand.nextInt(LootTablesEnchants.luckyFishingRodEnchants.size()));
+				int level = rand.nextInt((LootTablesEnchants.getLuckyFishingMaxLevels(ench)));
+			
+				item.addUnsafeEnchantment(ench, level);
+			}	
 		}
 		
 		return item;
