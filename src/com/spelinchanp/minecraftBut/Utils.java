@@ -19,6 +19,11 @@ public final class Utils {
 	private static Plugin plugin = Bukkit.getPluginManager().getPlugin("MinecraftBut");
 	
 	private static Random rand = new Random();
+	
+	/* Returns a random number within the specified range */
+	public static int getRandomRange(int min, int max) {
+		return (int) ((Math.random() * (max - min)) + min);
+	}
 		
 	/* Function to spawn TNT in a specified location in a specified world
 	 * that damages entities but does not destroy blocks */
@@ -64,7 +69,7 @@ public final class Utils {
 			for (int i = 0; i < numEnchants; i++) {
 				Enchantment ench = LootTablesEnchants.luckyFishingBookEnchants
 					.get(rand.nextInt(LootTablesEnchants.luckyFishingBookEnchants.size()));
-				int level = rand.nextInt((LootTablesEnchants.getLuckyFishingMaxLevels(ench)));
+				int level = getRandomRange(1, LootTablesEnchants.getLuckyFishingMaxLevels(ench));
 			
 				item.addUnsafeEnchantment(ench, level);
 			}	
@@ -75,7 +80,7 @@ public final class Utils {
 			for (int i = 0; i < numEnchants; i++) {
 				Enchantment ench = LootTablesEnchants.luckyFishingBowEnchants
 					.get(rand.nextInt(LootTablesEnchants.luckyFishingBowEnchants.size()));
-				int level = rand.nextInt((LootTablesEnchants.getLuckyFishingMaxLevels(ench)));
+				int level = getRandomRange(1, LootTablesEnchants.getLuckyFishingMaxLevels(ench));
 			
 				item.addUnsafeEnchantment(ench, level);
 			}	
@@ -86,7 +91,7 @@ public final class Utils {
 			for (int i = 0; i < numEnchants; i++) {
 				Enchantment ench = LootTablesEnchants.luckyFishingRodEnchants
 					.get(rand.nextInt(LootTablesEnchants.luckyFishingRodEnchants.size()));
-				int level = rand.nextInt((LootTablesEnchants.getLuckyFishingMaxLevels(ench)));
+				int level = getRandomRange(1, LootTablesEnchants.getLuckyFishingMaxLevels(ench));
 			
 				item.addUnsafeEnchantment(ench, level);
 			}	
