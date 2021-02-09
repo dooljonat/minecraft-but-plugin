@@ -39,9 +39,8 @@ public class MinecraftBut extends JavaPlugin {
 					public void run() {
 						
 						// Randomly select a new event
-						ButEvent.setRandomButEvent(); 
-						//ButEvent.butEvent = ButEvents.RandomEnchants;
-						Bukkit.broadcastMessage(ButEvent.butEvent.toString());
+						//ButEvent.setRandomButEvent(); 
+						ButEvent.butEvent = ButEvents.EggsOP;
 
 						switch (ButEvent.butEvent) {
 						case TntRain:
@@ -52,6 +51,10 @@ public class MinecraftBut extends JavaPlugin {
 							Bukkit.broadcastMessage(
 									ChatColor.GREEN + "Grass block chaos has commenced! Every grass block you "
 											+ "walk on will change to a random block!");		
+							break;
+						case EggsOP:
+							Bukkit.broadcastMessage(
+									ChatColor.YELLOW + "Thrown eggs will spawn OP items!");		
 							break;
 						case RandomEnchants:
 							Bukkit.broadcastMessage(

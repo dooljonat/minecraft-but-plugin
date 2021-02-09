@@ -78,12 +78,12 @@ public class MinecraftEvents {
 					if (item.containsEnchantment(Enchantment.LOOT_BONUS_BLOCKS)
 							&& newEnchant == Enchantment.SILK_TOUCH) {
 						newItem.addUnsafeEnchantment(Enchantment.LOOT_BONUS_BLOCKS, 
-								item.getEnchantmentLevel(Enchantment.LOOT_BONUS_BLOCKS)+1);
+								item.getEnchantmentLevel(Enchantment.LOOT_BONUS_BLOCKS));
 					}
 					else if (item.containsEnchantment(Enchantment.SILK_TOUCH)
 							&& newEnchant == Enchantment.LOOT_BONUS_BLOCKS) {
 						newItem.addUnsafeEnchantment(Enchantment.SILK_TOUCH, 
-								item.getEnchantmentLevel(Enchantment.SILK_TOUCH)+1);
+								item.getEnchantmentLevel(Enchantment.SILK_TOUCH));
 					}
 					// If item already has enchantment, stack the level
 					// if not, add new enchant
