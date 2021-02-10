@@ -121,8 +121,6 @@ public class LootTablesBlocks {
 						Material.GOLD_BLOCK,
 						Material.GOLD_INGOT,
 						Material.GRANITE,
-						Material.GRASS_BLOCK,
-						Material.GRASS_PATH,
 						Material.GRAVEL,
 						Material.GRAY_CONCRETE,
 						Material.GRAY_CONCRETE_POWDER,

@@ -29,12 +29,12 @@ public class MinecraftButListener implements Listener {
 			Block block = player.getLocation().getBlock().getRelative(BlockFace.DOWN);
 			
 			if (block.getType() == Material.GRASS_BLOCK) {
-				boolean isBlock = false;
 				Material mat = Material.AIR;
 				
 				mat = LootTablesBlocks
 						.walkableBlocks
-						.get(new Random().nextInt(Material.values().length));
+						.get(new Random().nextInt(
+								LootTablesBlocks.walkableBlocks.size()));
 
 				block.setType(mat);
 			}
