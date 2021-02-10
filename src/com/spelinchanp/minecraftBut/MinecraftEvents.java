@@ -18,6 +18,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.TNTPrimed;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -62,12 +63,12 @@ public class MinecraftEvents {
 				
 				for (int i = 0; i < players.size(); i++) {
 					// get actual inventory
-					Inventory inventory = players.get(i).getInventory();
+					PlayerInventory inventory = players.get(i).getInventory();
 					
-					// get inventory w/ null space
+					// get inventory without null space
 					List<ItemStack> inv = Utils.getInventory(players.get(i));
 					
-					// get random item
+					// Get random item
 					ItemStack item = inv.get(new Random().nextInt(inv.size()));
 					
 					// Create new item and random enchantment

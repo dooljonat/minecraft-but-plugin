@@ -41,7 +41,7 @@ public final class Utils {
 	/* Function to get every item in a player's inventory, excluding null/empty slots */
 	public static List<ItemStack> getInventory(Player player) {
 		List<ItemStack> stack = new ArrayList<ItemStack>();
-		for (ItemStack i : player.getInventory().getContents()) {
+		for (ItemStack i : player.getInventory()) {
 			if (i != null) {
 				stack.add(i);
 			}
