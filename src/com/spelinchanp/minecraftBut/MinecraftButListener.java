@@ -29,18 +29,12 @@ public class MinecraftButListener implements Listener {
 			Block block = player.getLocation().getBlock().getRelative(BlockFace.DOWN);
 			
 			if (block.getType() == Material.GRASS_BLOCK) {
-				boolean isBlock = false;
 				Material mat = Material.AIR;
 				
-				// this is disgusting, please find a better way to check if a material
-				// is a block in the future
-				while (!isBlock) {
-					mat = Material.values()
-							[new Random().nextInt(Material.values().length)];
-					
-					if (mat.isBlock())
-						isBlock = true;
-				}
+				mat = LootTablesBlocks
+						.walkableBlocks
+						.get(new Random().nextInt(
+								LootTablesBlocks.walkableBlocks.size()));
 
 				block.setType(mat);
 			}
