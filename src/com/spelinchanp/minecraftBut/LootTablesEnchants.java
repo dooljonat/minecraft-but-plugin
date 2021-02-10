@@ -13,7 +13,7 @@ public class LootTablesEnchants {
 	public static ArrayList<Enchantment> luckyFishingBookEnchants = loadLuckyFishingBookEnchants();
 	
 	
-	public static ArrayList<Enchantment> loadLuckyFishingBowEnchants() {
+	private static ArrayList<Enchantment> loadLuckyFishingBowEnchants() {
 		// In the future read this from a config file
 		return new ArrayList<Enchantment>(
 		        Arrays.asList(
@@ -24,7 +24,7 @@ public class LootTablesEnchants {
 		        		));
 	}
 	
-	public static ArrayList<Enchantment> loadLuckyFishingRodEnchants() {
+	private static ArrayList<Enchantment> loadLuckyFishingRodEnchants() {
 		// In the future read this from a config file
 		return new ArrayList<Enchantment>(
 		        Arrays.asList(
@@ -35,7 +35,7 @@ public class LootTablesEnchants {
 		        		));
 	}
 	
-	public static ArrayList<Enchantment> loadLuckyFishingBookEnchants() {
+	private static ArrayList<Enchantment> loadLuckyFishingBookEnchants() {
 		// In the future read this from a config file
 		return new ArrayList<Enchantment>(
 		        Arrays.asList(

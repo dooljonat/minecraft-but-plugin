@@ -25,8 +25,7 @@ public class MinecraftBut extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new MinecraftButListener(), this);
 		
 		// Instantiate MinecraftBut
-		MinecraftEvents events = new MinecraftEvents(this);
-		
+		MinecraftEvents events = new MinecraftEvents(this);		
 		// Enable all
 		events.enableTNTrain();
 		events.enableRandomEnchants();

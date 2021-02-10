@@ -32,15 +32,9 @@ public class MinecraftButListener implements Listener {
 				boolean isBlock = false;
 				Material mat = Material.AIR;
 				
-				// this is disgusting, please find a better way to check if a material
-				// is a block in the future
-				while (!isBlock) {
-					mat = Material.values()
-							[new Random().nextInt(Material.values().length)];
-					
-					if (mat.isBlock())
-						isBlock = true;
-				}
+				mat = LootTablesBlocks
+						.walkableBlocks
+						.get(new Random().nextInt(Material.values().length));
 
 				block.setType(mat);
 			}
