@@ -11,7 +11,6 @@ import org.bukkit.scheduler.BukkitTask;
 public class MinecraftBut extends JavaPlugin {
 	private static Plugin plugin;
 	private static ButEvent butEvent;
-	private static BukkitTask task = null;
 
 	@Override
 	public void onEnable() {
@@ -38,45 +37,31 @@ public class MinecraftBut extends JavaPlugin {
 				new Runnable() {
 					@Override
 					public void run() {
-						// Instantiate MinecraftEvent
-						MinecraftEvent events = new MinecraftEvent(plugin);	
-						
 						// Randomly select a new event
 						ButEvent.setRandomButEvent(); 
+						//ButEvent.butEvent = ButEvents.TntRain;
+						
+						// Instantiate MinecraftEvent
+						// (all other listener-based events are run in MinecraftButListener)
+						MinecraftEvent event = new MinecraftEvent(plugin, ButEvent.butEvent);	
+						
+						//Bukkit.broadcastMessage(ButEvent.butEvent.toString());
 
 						switch (ButEvent.butEvent) {
-						case TntRain:
-							if (task != null) {
-								task.cancel();
-							}
-							task = events.enableTNTrain();
-							
+						case TntRain:		
 							Bukkit.broadcastMessage(
 									ChatColor.RED + "TNT Rain has commenced! TNT will drop every three seconds");
 							break;
 						case RandomBlocksWalking:	
-							if (task != null) {
-								task.cancel();
-							}
-							
 							Bukkit.broadcastMessage(
 									ChatColor.GREEN + "Grass block chaos has commenced! Every grass block you "
 											+ "walk on will change to a random block!");		
 							break;
 						case EggsOP:
-							if (task != null) {
-								task.cancel();
-							}
-							
 							Bukkit.broadcastMessage(
 									ChatColor.YELLOW + "Thrown eggs will spawn OP items!");		
 							break;
 						case RandomEnchants:
-							if (task != null) {
-								task.cancel();
-							}
-							task = events.enableRandomEnchants();
-							
 							Bukkit.broadcastMessage(
 									ChatColor.BLUE + "Random enchants has commenced! A random item in your inventory"
 											+ " will be given a random enchantment every three seconds");
