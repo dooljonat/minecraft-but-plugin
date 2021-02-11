@@ -2,37 +2,20 @@ package com.spelinchanp.minecraftBut;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.TNTPrimed;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
-import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scheduler.BukkitScheduler;
-import org.bukkit.scheduler.BukkitTask;
 
-public class MinecraftEvents {
-	private Plugin plugin;
-	
-	MinecraftEvents(Plugin plugin) {
-		this.plugin = plugin;
-	}
-	
-	private BukkitRunnable tntRain = new BukkitRunnable() {
+public class EventRunnables {
+	public static BukkitRunnable tntRain = new BukkitRunnable() {
 		@Override
 		public void run() {
 			if (ButEvent.butEvent == ButEvents.TntRain) {
@@ -52,7 +35,7 @@ public class MinecraftEvents {
 		}
 	};
 	
-	private BukkitRunnable randomEnchants = new BukkitRunnable() {
+	public static BukkitRunnable randomEnchants = new BukkitRunnable() {
 		@Override
 		public void run() {
 			if (ButEvent.butEvent == ButEvents.RandomEnchants) {
@@ -115,20 +98,4 @@ public class MinecraftEvents {
 			}
 		}
 	};
-	
-	
-	public void enableTNTrain() {
-		tntRain.runTaskTimer(plugin, 0, 20*10);
-	} 
-	
-	public void enableRandomEnchants() {
-		randomEnchants.runTaskTimer(plugin, 0, 20*1);
-	}
-	
-	public void disableAll() {	
-		tntRain.cancel();	
-		randomEnchants.cancel();
-		//Bukkit.getScheduler().cancelTask(randomEnchantsTask);
-	}
-	
 }
