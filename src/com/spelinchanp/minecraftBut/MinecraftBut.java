@@ -38,8 +38,8 @@ public class MinecraftBut extends JavaPlugin {
 					public void run() {
 						
 						// Randomly select a new event
-						//ButEvent.setRandomButEvent(); 
-						ButEvent.butEvent = ButEvents.RandomBlocksWalking;
+						ButEvent.setRandomButEvent(); 
+						//ButEvent.butEvent = ButEvents.RandomEnchants;
 
 						switch (ButEvent.butEvent) {
 						case TntRain:
