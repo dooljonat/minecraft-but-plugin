@@ -67,130 +67,49 @@ public class MinecraftEvents {
 					
 					// get inventory without null space
 					List<ItemStack> inv = Utils.getNonNullInventory(players.get(i));
+					// get armor without null space
+					List<ItemStack> armor = Utils.getNonNullArmor(players.get(i));
 					
-					// Get random item
-					ItemStack item = inv.get(new Random().nextInt(inv.size()));
+					int activeInvSize = inv.size();
+					int activeArmorSize = armor.size();
+					Bukkit.broadcastMessage(String.valueOf(armor.size()));
+					int totalActiveSize = activeInvSize+activeArmorSize;
 					
-					// Check if armor slots are null first,
-					// then check if the item is in an armor slot or not
-					if (inventory.getHelmet() != null) {
-						if (inventory.getHelmet().equals(item)) {
-							// Create new item and random enchantment
-							ItemStack newItem = item;
-							Enchantment newEnchant = Utils.getRandomEnchantment();
-							
-							// If item already has enchantment, stack the level
-							// if not, add new enchant
-							if (item.containsEnchantment(newEnchant)) {
-								// level cap
-								if (item.getEnchantmentLevel(newEnchant) < 100) 
-									newItem.addUnsafeEnchantment(newEnchant, 
-											item.getEnchantmentLevel(newEnchant)+1);
-							}		
-							else 
-								newItem.addUnsafeEnchantment(newEnchant, 1);
-							
-							// Remove the item
-							if (item == inventory.getHelmet()) 
-								inventory.setHelmet(newItem);			
-						} 
-					}
-					else if (inventory.getChestplate() != null) {
-						if (inventory.getChestplate().equals(item)) {
-							// Create new item and random enchantment
-							ItemStack newItem = item;
-							Enchantment newEnchant = Utils.getRandomEnchantment();
-							
-							// If item already has enchantment, stack the level
-							// if not, add new enchant
-							if (item.containsEnchantment(newEnchant)) {
-								// level cap
-								if (item.getEnchantmentLevel(newEnchant) < 100) 
-									newItem.addUnsafeEnchantment(newEnchant, 
-											item.getEnchantmentLevel(newEnchant)+1);
-							}		
-							else 
-								newItem.addUnsafeEnchantment(newEnchant, 1);
-							
-							// Remove the item
-							if (item == inventory.getHelmet()) 
-								inventory.setChestplate(newItem);			
-						} 
-					}
-					else if (inventory.getLeggings() != null) {
-						if (inventory.getLeggings().equals(item)) {
-							// Create new item and random enchantment
-							ItemStack newItem = item;
-							Enchantment newEnchant = Utils.getRandomEnchantment();
-							
-							// If item already has enchantment, stack the level
-							// if not, add new enchant
-							if (item.containsEnchantment(newEnchant)) {
-								// level cap
-								if (item.getEnchantmentLevel(newEnchant) < 100) 
-									newItem.addUnsafeEnchantment(newEnchant, 
-											item.getEnchantmentLevel(newEnchant)+1);
-							}		
-							else 
-								newItem.addUnsafeEnchantment(newEnchant, 1);
-							
-							// Remove the item
-							if (item == inventory.getHelmet()) 
-								inventory.setLeggings(newItem);			
-						} 
-					}
-					else if (inventory.getBoots() != null) {
-						if (inventory.getBoots().equals(item)) {
-							// Create new item and random enchantment
-							ItemStack newItem = item;
-							Enchantment newEnchant = Utils.getRandomEnchantment();
-							
-							// If item already has enchantment, stack the level
-							// if not, add new enchant
-							if (item.containsEnchantment(newEnchant)) {
-								// level cap
-								if (item.getEnchantmentLevel(newEnchant) < 100) 
-									newItem.addUnsafeEnchantment(newEnchant, 
-											item.getEnchantmentLevel(newEnchant)+1);
-							}		
-							else 
-								newItem.addUnsafeEnchantment(newEnchant, 1);
-							
-							// Remove the item
-							if (item == inventory.getHelmet()) 
-								inventory.setBoots(newItem);			
-						} 
-					}
-					else {
-						// Create new item and random enchantment
-						ItemStack newItem = item;
+					// generate random number to pick armor or item
+					double num = Utils.getRandomDoubleRange(0, totalActiveSize);
+					
+					// pick armor
+					if (num > totalActiveSize-activeArmorSize && armor.size() != 0) {
+						ItemStack item = armor.get(new Random().nextInt(armor.size()));
+						
 						Enchantment newEnchant = Utils.getRandomEnchantment();
+						ItemStack newItem = Utils.addOrStackEnchantment(item, 
+								newEnchant, 
+								item.getEnchantmentLevel(newEnchant), 
+								100);
 						
-						// if item has fortune and newEnchant = silk touch vice versa
-						if (item.containsEnchantment(Enchantment.LOOT_BONUS_BLOCKS)
-								&& newEnchant == Enchantment.SILK_TOUCH) {
-							newItem.addUnsafeEnchantment(Enchantment.LOOT_BONUS_BLOCKS, 
-									item.getEnchantmentLevel(Enchantment.LOOT_BONUS_BLOCKS));
-						}
-						else if (item.containsEnchantment(Enchantment.SILK_TOUCH)
-								&& newEnchant == Enchantment.LOOT_BONUS_BLOCKS) {
-							newItem.addUnsafeEnchantment(Enchantment.SILK_TOUCH, 
-									item.getEnchantmentLevel(Enchantment.SILK_TOUCH));
-						}
-						// If item already has enchantment, stack the level
-						// if not, add new enchant
-						if (item.containsEnchantment(newEnchant)) {
-							// level cap
-							if (item.getEnchantmentLevel(newEnchant) < 100) 
-								newItem.addUnsafeEnchantment(newEnchant, 
-										item.getEnchantmentLevel(newEnchant)+1);
-						}		
-						else 
-							newItem.addUnsafeEnchantment(newEnchant, 1);
+						if (Utils.isHelmet(newItem))
+							inventory.setHelmet(newItem);
+						else if (Utils.isChestplate(newItem)) 
+							inventory.setChestplate(newItem);
+						else if (Utils.isLeggings(newItem))
+							inventory.setLeggings(newItem);
+						else if (Utils.isBoots(newItem)) 
+							inventory.setBoots(newItem);
 						
-						// Replace the item
+					}
+					// pick other
+					else if (inv.size() != 0) {
+						ItemStack item = inv.get(new Random().nextInt(inv.size()));
+						
+						Enchantment newEnchant = Utils.getRandomEnchantment();
+						ItemStack newItem = Utils.addOrStackEnchantmentFOST(item, 
+								newEnchant, 
+								item.getEnchantmentLevel(newEnchant), 
+								100);
+						
 						inventory.remove(item);
-						inventory.addItem(newItem);	
+						inventory.addItem(newItem);
 					}
 				}
 			}
