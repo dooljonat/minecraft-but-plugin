@@ -66,40 +66,132 @@ public class MinecraftEvents {
 					PlayerInventory inventory = players.get(i).getInventory();
 					
 					// get inventory without null space
-					List<ItemStack> inv = Utils.getInventory(players.get(i));
+					List<ItemStack> inv = Utils.getNonNullInventory(players.get(i));
 					
 					// Get random item
 					ItemStack item = inv.get(new Random().nextInt(inv.size()));
 					
-					// Create new item and random enchantment
-					ItemStack newItem = item;
-					Enchantment newEnchant = Utils.getRandomEnchantment();
-					
-					// if item has fortune and newEnchant = silk touch vice versa
-					if (item.containsEnchantment(Enchantment.LOOT_BONUS_BLOCKS)
-							&& newEnchant == Enchantment.SILK_TOUCH) {
-						newItem.addUnsafeEnchantment(Enchantment.LOOT_BONUS_BLOCKS, 
-								item.getEnchantmentLevel(Enchantment.LOOT_BONUS_BLOCKS));
+					// Check if armor slots are null first,
+					// then check if the item is in an armor slot or not
+					if (inventory.getHelmet() != null) {
+						if (inventory.getHelmet().equals(item)) {
+							// Create new item and random enchantment
+							ItemStack newItem = item;
+							Enchantment newEnchant = Utils.getRandomEnchantment();
+							
+							// If item already has enchantment, stack the level
+							// if not, add new enchant
+							if (item.containsEnchantment(newEnchant)) {
+								// level cap
+								if (item.getEnchantmentLevel(newEnchant) < 100) 
+									newItem.addUnsafeEnchantment(newEnchant, 
+											item.getEnchantmentLevel(newEnchant)+1);
+							}		
+							else 
+								newItem.addUnsafeEnchantment(newEnchant, 1);
+							
+							// Remove the item
+							if (item == inventory.getHelmet()) 
+								inventory.setHelmet(newItem);			
+						} 
 					}
-					else if (item.containsEnchantment(Enchantment.SILK_TOUCH)
-							&& newEnchant == Enchantment.LOOT_BONUS_BLOCKS) {
-						newItem.addUnsafeEnchantment(Enchantment.SILK_TOUCH, 
-								item.getEnchantmentLevel(Enchantment.SILK_TOUCH));
+					else if (inventory.getChestplate() != null) {
+						if (inventory.getChestplate().equals(item)) {
+							// Create new item and random enchantment
+							ItemStack newItem = item;
+							Enchantment newEnchant = Utils.getRandomEnchantment();
+							
+							// If item already has enchantment, stack the level
+							// if not, add new enchant
+							if (item.containsEnchantment(newEnchant)) {
+								// level cap
+								if (item.getEnchantmentLevel(newEnchant) < 100) 
+									newItem.addUnsafeEnchantment(newEnchant, 
+											item.getEnchantmentLevel(newEnchant)+1);
+							}		
+							else 
+								newItem.addUnsafeEnchantment(newEnchant, 1);
+							
+							// Remove the item
+							if (item == inventory.getHelmet()) 
+								inventory.setChestplate(newItem);			
+						} 
 					}
-					// If item already has enchantment, stack the level
-					// if not, add new enchant
-					else if (item.containsEnchantment(newEnchant)) {
-						if (item.getEnchantmentLevel(newEnchant) < 25) 
-							newItem.addUnsafeEnchantment(newEnchant, item.getEnchantmentLevel(newEnchant)+1);
-					}		
-					else 
-						newItem.addUnsafeEnchantment(newEnchant, 1);
-					
-					newItem.removeEnchantment(Enchantment.SILK_TOUCH);
-					
-					// Replace the item
-					inventory.remove(item);
-					inventory.addItem(newItem);		
+					else if (inventory.getLeggings() != null) {
+						if (inventory.getLeggings().equals(item)) {
+							// Create new item and random enchantment
+							ItemStack newItem = item;
+							Enchantment newEnchant = Utils.getRandomEnchantment();
+							
+							// If item already has enchantment, stack the level
+							// if not, add new enchant
+							if (item.containsEnchantment(newEnchant)) {
+								// level cap
+								if (item.getEnchantmentLevel(newEnchant) < 100) 
+									newItem.addUnsafeEnchantment(newEnchant, 
+											item.getEnchantmentLevel(newEnchant)+1);
+							}		
+							else 
+								newItem.addUnsafeEnchantment(newEnchant, 1);
+							
+							// Remove the item
+							if (item == inventory.getHelmet()) 
+								inventory.setLeggings(newItem);			
+						} 
+					}
+					else if (inventory.getBoots() != null) {
+						if (inventory.getBoots().equals(item)) {
+							// Create new item and random enchantment
+							ItemStack newItem = item;
+							Enchantment newEnchant = Utils.getRandomEnchantment();
+							
+							// If item already has enchantment, stack the level
+							// if not, add new enchant
+							if (item.containsEnchantment(newEnchant)) {
+								// level cap
+								if (item.getEnchantmentLevel(newEnchant) < 100) 
+									newItem.addUnsafeEnchantment(newEnchant, 
+											item.getEnchantmentLevel(newEnchant)+1);
+							}		
+							else 
+								newItem.addUnsafeEnchantment(newEnchant, 1);
+							
+							// Remove the item
+							if (item == inventory.getHelmet()) 
+								inventory.setBoots(newItem);			
+						} 
+					}
+					else {
+						// Create new item and random enchantment
+						ItemStack newItem = item;
+						Enchantment newEnchant = Utils.getRandomEnchantment();
+						
+						// if item has fortune and newEnchant = silk touch vice versa
+						if (item.containsEnchantment(Enchantment.LOOT_BONUS_BLOCKS)
+								&& newEnchant == Enchantment.SILK_TOUCH) {
+							newItem.addUnsafeEnchantment(Enchantment.LOOT_BONUS_BLOCKS, 
+									item.getEnchantmentLevel(Enchantment.LOOT_BONUS_BLOCKS));
+						}
+						else if (item.containsEnchantment(Enchantment.SILK_TOUCH)
+								&& newEnchant == Enchantment.LOOT_BONUS_BLOCKS) {
+							newItem.addUnsafeEnchantment(Enchantment.SILK_TOUCH, 
+									item.getEnchantmentLevel(Enchantment.SILK_TOUCH));
+						}
+						// If item already has enchantment, stack the level
+						// if not, add new enchant
+						if (item.containsEnchantment(newEnchant)) {
+							// level cap
+							if (item.getEnchantmentLevel(newEnchant) < 100) 
+								newItem.addUnsafeEnchantment(newEnchant, 
+										item.getEnchantmentLevel(newEnchant)+1);
+						}		
+						else 
+							newItem.addUnsafeEnchantment(newEnchant, 1);
+						
+						// Replace the item
+						inventory.remove(item);
+						inventory.addItem(newItem);	
+					}
 				}
 			}
 		}
