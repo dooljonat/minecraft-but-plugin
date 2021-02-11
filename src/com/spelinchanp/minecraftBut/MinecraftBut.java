@@ -4,9 +4,12 @@ import java.lang.Math;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitTask;
 
 public class MinecraftBut extends JavaPlugin {
+	private static Plugin plugin;
 	private static ButEvent butEvent;
 
 	@Override
@@ -21,14 +24,12 @@ public class MinecraftBut extends JavaPlugin {
 	}
 
 	public void MinecraftBut() {
+		// Set the plugin
+		plugin = this;
+		
 		// Register the event listener
 		getServer().getPluginManager().registerEvents(new MinecraftButListener(), this);
 		
-		// Instantiate MinecraftBut
-		MinecraftEvents events = new MinecraftEvents(this);		
-		// Enable all
-		events.enableTNTrain();
-		events.enableRandomEnchants();
 
 		// Select a new MinecraftButEvent every five minutes
 		Bukkit.getScheduler()
@@ -36,17 +37,22 @@ public class MinecraftBut extends JavaPlugin {
 				new Runnable() {
 					@Override
 					public void run() {
-						
 						// Randomly select a new event
 						ButEvent.setRandomButEvent(); 
-						//ButEvent.butEvent = ButEvents.RandomEnchants;
+						//ButEvent.butEvent = ButEvents.TntRain;
+						
+						// Instantiate MinecraftEvent
+						// (all other listener-based events are run in MinecraftButListener)
+						MinecraftEvent event = new MinecraftEvent(plugin, ButEvent.butEvent);	
+						
+						//Bukkit.broadcastMessage(ButEvent.butEvent.toString());
 
 						switch (ButEvent.butEvent) {
-						case TntRain:
+						case TntRain:		
 							Bukkit.broadcastMessage(
 									ChatColor.RED + "TNT Rain has commenced! TNT will drop every three seconds");
 							break;
-						case RandomBlocksWalking:
+						case RandomBlocksWalking:	
 							Bukkit.broadcastMessage(
 									ChatColor.GREEN + "Grass block chaos has commenced! Every grass block you "
 											+ "walk on will change to a random block!");		
@@ -62,7 +68,6 @@ public class MinecraftBut extends JavaPlugin {
 							break;
 						}
 					}
-
 				}, 1, 20 * 30);
 
 	}
