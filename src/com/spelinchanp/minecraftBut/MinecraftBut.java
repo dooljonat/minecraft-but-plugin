@@ -50,7 +50,7 @@ public class MinecraftBut extends JavaPlugin {
 						switch (ButEvent.butEvent) {
 						case TntRain:		
 							Bukkit.broadcastMessage(
-									ChatColor.RED + "TNT Rain has commenced! TNT will drop every three seconds");
+									ChatColor.RED + "TNT Rain has commenced! TNT will drop every ten seconds");
 							break;
 						case RandomBlocksWalking:	
 							Bukkit.broadcastMessage(
