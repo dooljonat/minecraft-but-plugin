@@ -2,25 +2,29 @@ package com.spelinchanp.minecraftBut;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 public class LootTablesItems {
-	public static ArrayList<ItemStack> luckyFishingLootTable = loadFishingLootTable();
+	public static ArrayList<Material> luckyFishingLootTable = loadLuckyFishingLootTable();
 	
+	public static Material getRandomLuckyFishingItem() {
+		return luckyFishingLootTable.get(new Random().nextInt(luckyFishingLootTable.size()));
+	}
 	
-	public static ArrayList<ItemStack> loadFishingLootTable() {
+	private static ArrayList<Material> loadLuckyFishingLootTable() {
 		// In the future read this from a config file
-		return new ArrayList<ItemStack>(
+		return new ArrayList<Material>(
 		        Arrays.asList(
-		        		new ItemStack(Material.BOW),
-		        		new ItemStack(Material.ENCHANTED_BOOK),
-		        		new ItemStack(Material.FISHING_ROD),
-		        		new ItemStack(Material.NAME_TAG),
-		        		new ItemStack(Material.COD),
-		        		new ItemStack(Material.NAUTILUS_SHELL),
-		        		new ItemStack(Material.SADDLE)
+		        		Material.BOW,
+		        		Material.ENCHANTED_BOOK,
+		        		Material.FISHING_ROD,
+		        		Material.NAME_TAG,
+		        		Material.COD,
+		        		Material.NAUTILUS_SHELL,
+		        		Material.SADDLE
 		        		));
 	}
 }

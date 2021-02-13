@@ -2,6 +2,7 @@ package com.spelinchanp.minecraftBut;
 
 import java.util.Random;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -11,12 +12,16 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.ProjectileHitEvent;
+import org.bukkit.event.player.PlayerEggThrowEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.inventory.ItemStack;
 
 
 
 public class MinecraftButListener implements Listener {
+	public static int timer;
+	
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent event) {
 		
@@ -47,14 +52,20 @@ public class MinecraftButListener implements Listener {
 			if (e.getEntity() instanceof Egg) {
 				Egg egg = (Egg) e.getEntity();
 				Block block = egg.getLocation().getBlock();
-				
+					
 				if (block != null) {
 					Location loc = block.getLocation();
+						
+					ItemStack item = LootGenerator.randomLuckyFishingItem();
 					loc.getWorld().dropItem(loc, 
-							Utils.getRandomLuckyFishingItem());
+								item);
+					
+					timer++;
+					Bukkit.broadcastMessage(String.valueOf(timer));
 				}
-				
 			}
+			
+
 		}
 	}
 }
