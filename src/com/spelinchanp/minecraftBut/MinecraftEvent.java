@@ -54,10 +54,12 @@ public class MinecraftEvent {
 			List<Player> players = new ArrayList<>(Bukkit.getOnlinePlayers());
 				
 			for (int i = 0; i < players.size(); i++) {
-				// set TNT block
-				Location loc = players.get(i).getLocation();
-				World world = players.get(i).getWorld();
-				Utils.createTNTnoDestruction(loc, world);
+				// if player isn't wearing leather boots, set TNT block
+				if (!Utils.hasArmorType(players.get(i).getInventory().getBoots(), Material.LEATHER_BOOTS)) {
+					Location loc = players.get(i).getLocation();
+					World world = players.get(i).getWorld();
+					Utils.createTNTnoDestruction(loc, world);
+				}
 			}		
 			timesRun++;
 			Bukkit.broadcastMessage(String.valueOf(timesRun));

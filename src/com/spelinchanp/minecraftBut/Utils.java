@@ -127,6 +127,11 @@ public final class Utils {
 		return false;
 	}
 	
+	/* Function to test if player has armor without a null pointer exception */
+	public static boolean hasArmorType(ItemStack item, Material type)
+	{
+	    return (item == null ? false : item.getType() == type);
+	}
 		
 	/* Returns a random enchantment */
 	public static Enchantment getRandomEnchantment() {

@@ -39,7 +39,7 @@ public class MinecraftBut extends JavaPlugin {
 					public void run() {
 						// Randomly select a new event
 						ButEvent.setRandomButEvent(); 
-						//ButEvent.butEvent = ButEvents.EggsOP;
+						//ButEvent.butEvent = ButEvents.TntRain;
 						
 						// Instantiate MinecraftEvent
 						// (all other listener-based events are run in MinecraftButListener)
@@ -50,7 +50,7 @@ public class MinecraftBut extends JavaPlugin {
 						switch (ButEvent.butEvent) {
 						case TntRain:		
 							Bukkit.broadcastMessage(
-									ChatColor.RED + "TNT Rain has commenced! TNT will drop every ten seconds");
+									ChatColor.RED + "TNT Rain has commenced! TNT will drop every ten seconds! Slap on some leather boots to become immune!");
 							break;
 						case RandomBlocksWalking:	
 							Bukkit.broadcastMessage(
