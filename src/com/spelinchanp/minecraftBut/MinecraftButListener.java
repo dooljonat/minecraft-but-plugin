@@ -7,7 +7,10 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+import org.bukkit.block.BlockState;
+import org.bukkit.block.CreatureSpawner;
 import org.bukkit.entity.Egg;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -40,8 +43,17 @@ public class MinecraftButListener implements Listener {
 						.walkableBlocks
 						.get(new Random().nextInt(
 								LootTablesBlocks.walkableBlocks.size()));
-
+				
 				block.setType(mat);
+				
+				if (mat == Material.SPAWNER) {
+					BlockState blockState = block.getState();
+					CreatureSpawner spawner = ((CreatureSpawner)blockState);
+					spawner.setSpawnedType(
+							LootTablesEntities.spawnerEntities.get(new Random().nextInt(
+									LootTablesEntities.spawnerEntities.size())));
+					blockState.update();
+				}
 			}
 		}
 	}
