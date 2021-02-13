@@ -39,7 +39,7 @@ public class MinecraftBut extends JavaPlugin {
 					public void run() {
 						// Randomly select a new event
 						ButEvent.setRandomButEvent(); 
-						//ButEvent.butEvent = ButEvents.TntRain;
+						//ButEvent.butEvent = ButEvents.RandomBlocksWalking;
 						
 						// Instantiate MinecraftEvent
 						// (all other listener-based events are run in MinecraftButListener)
