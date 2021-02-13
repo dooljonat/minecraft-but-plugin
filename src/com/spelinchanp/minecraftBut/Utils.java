@@ -13,6 +13,7 @@ import org.bukkit.block.Block;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.plugin.Plugin;
 
 public final class Utils {
@@ -184,49 +185,11 @@ public final class Utils {
 		return item;
 	}
 	
-	/* Returns a random lucky item based off of fishing luck of the sea 3 loot tables */
-	public static ItemStack getRandomLuckyFishingItem() {
-		ItemStack item = LootTablesItems.luckyFishingLootTable
-				.get(
-						rand.nextInt(LootTablesItems.luckyFishingLootTable.size()));
-		
-		// If item is an enchanted book, fishing rod, or bow, 
-		// give it 1 to four3 random enchants
-		// (Create different enchantment tables for the different 
-		if (item.getType() == Material.ENCHANTED_BOOK) {
-			int numEnchants = rand.nextInt(5);
-			
-			for (int i = 0; i < numEnchants; i++) {
-				Enchantment ench = LootTablesEnchants.luckyFishingBookEnchants
-					.get(rand.nextInt(LootTablesEnchants.luckyFishingBookEnchants.size()));
-				int level = getRandomIntRange(1, LootTablesEnchants.getLuckyFishingMaxLevels(ench));
-			
-				item.addUnsafeEnchantment(ench, level);
-			}	
-		}
-		else if (item.getType() == Material.BOW) {
-			int numEnchants = rand.nextInt(5);
-			
-			for (int i = 0; i < numEnchants; i++) {
-				Enchantment ench = LootTablesEnchants.luckyFishingBowEnchants
-					.get(rand.nextInt(LootTablesEnchants.luckyFishingBowEnchants.size()));
-				int level = getRandomIntRange(1, LootTablesEnchants.getLuckyFishingMaxLevels(ench));
-			
-				item.addUnsafeEnchantment(ench, level);
-			}	
-		}
-		else if (item.getType() == Material.FISHING_ROD) {
-			int numEnchants = rand.nextInt(5);
-			
-			for (int i = 0; i < numEnchants; i++) {
-				Enchantment ench = LootTablesEnchants.luckyFishingRodEnchants
-					.get(rand.nextInt(LootTablesEnchants.luckyFishingRodEnchants.size()));
-				int level = getRandomIntRange(1, LootTablesEnchants.getLuckyFishingMaxLevels(ench));
-			
-				item.addUnsafeEnchantment(ench, level);
-			}	
-		}
-		
-		return item;
-	}
+	public static ItemStack addBookEnchantment(ItemStack item, Enchantment enchantment, int level){
+        EnchantmentStorageMeta meta = (EnchantmentStorageMeta) item.getItemMeta();
+        meta.addStoredEnchant(enchantment, level, true);
+        item.setItemMeta(meta);
+        return item;
+    }
+	
 }
