@@ -62,7 +62,6 @@ public class MinecraftEvent {
 				}
 			}		
 			timesRun++;
-			Bukkit.broadcastMessage(String.valueOf(timesRun));
 			if (timesRun == 3) {
 				cancel();
 				tntRainRunnable = null;
@@ -131,7 +130,6 @@ public class MinecraftEvent {
 				}
 			}
 			timesRun++;
-			Bukkit.broadcastMessage(String.valueOf(timesRun));
 			if (timesRun == 30) {
 				cancel();
 				randomEnchantsRunnable = null;
