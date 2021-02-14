@@ -83,14 +83,14 @@ public class MinecraftEvent {
 				// get actual inventory
 				PlayerInventory inventory = players.get(i).getInventory();
 					
-				// get inventory without null space
-				List<ItemStack> inv = Utils.getNonNullInventory(players.get(i));
+				// get tools without null space
+				List<ItemStack> tools = Utils.getInventoryTools(inventory);
 				// get armor without null space
-				List<ItemStack> armor = Utils.getNonNullArmor(players.get(i));
+				List<ItemStack> armor = Utils.getInventoryTools(inventory);
 					
-				int activeInvSize = inv.size();
+				int activeToolsSize = tools.size();
 				int activeArmorSize = armor.size();
-				int totalActiveSize = activeInvSize+activeArmorSize;
+				int totalActiveSize = activeToolsSize+activeArmorSize;
 					
 				// generate random number to pick armor or item
 				double num = Utils.getRandomDoubleRange(0, totalActiveSize);
@@ -116,8 +116,8 @@ public class MinecraftEvent {
 						
 				}
 				// pick other
-				else if (inv.size() != 0) {
-					ItemStack item = inv.get(new Random().nextInt(inv.size()));
+				else if (tools.size() != 0) {
+					ItemStack item = tools.get(new Random().nextInt(tools.size()));
 						
 					Enchantment newEnchant = Utils.getRandomEnchantment();
 					ItemStack newItem = Utils.addOrStackEnchantmentFOST(item, 
