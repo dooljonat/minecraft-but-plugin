@@ -100,11 +100,31 @@ public class MinecraftEvent {
 					ItemStack item = armor.get(new Random().nextInt(armor.size()));
 						
 					Enchantment newEnchant = Utils.getRandomEnchantment();
-					ItemStack newItem = Utils.addOrStackEnchantment(item, 
-							newEnchant, 
-							item.getEnchantmentLevel(newEnchant), 
-							100);
+					ItemStack newItem;
+					if (item.containsEnchantment(Enchantment.LOOT_BONUS_BLOCKS) 
+							&& newEnchant == Enchantment.SILK_TOUCH) {
+						Bukkit.broadcastMessage("FORTUNE");
 						
+						newItem = Utils.addOrStackEnchantment(item, 
+								Enchantment.LOOT_BONUS_BLOCKS, 
+								item.getEnchantmentLevel(Enchantment.LOOT_BONUS_BLOCKS), 
+								100);
+					}
+					else if (item.containsEnchantment(Enchantment.SILK_TOUCH) 
+							&& newEnchant == Enchantment.LOOT_BONUS_BLOCKS) {
+						Bukkit.broadcastMessage("SILK TOUCH");
+						
+						newItem = Utils.addOrStackEnchantment(item, 
+								Enchantment.SILK_TOUCH, 
+								item.getEnchantmentLevel(Enchantment.SILK_TOUCH), 
+								100);
+					}
+					else {
+						newItem = Utils.addOrStackEnchantment(item, 
+								newEnchant, 
+								item.getEnchantmentLevel(newEnchant), 
+								100);
+					}
 					if (Utils.isHelmet(newItem))
 						inventory.setHelmet(newItem);
 					else if (Utils.isChestplate(newItem)) 

@@ -17,7 +17,18 @@ public class LootTablesEnchants {
 		return luckyFishingBookEnchants.get(new Random().nextInt(luckyFishingBookEnchants.size()));
 	}
 	
-	
+	private static ArrayList<Enchantment> loadEnchants() {
+		return new ArrayList<Enchantment>(
+				Arrays.asList(
+						Enchantment.ARROW_DAMAGE,
+						Enchantment.ARROW_FIRE,
+						Enchantment.ARROW_INFINITE,
+						Enchantment.ARROW_KNOCKBACK,
+						Enchantment.BINDING_CURSE,
+						Enchantment.CHANNELING,
+						Enchantment.DAMAGE_ALL,
+						Enchantment.DAMAGE_ARTHROPODS));
+	}
 	
 	private static ArrayList<Enchantment> loadLuckyFishingBowEnchants() {
 		// In the future read this from a config file
