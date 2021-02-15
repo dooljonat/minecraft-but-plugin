@@ -153,10 +153,13 @@ public final class Utils {
 	{
 	    return (item == null ? false : item.getType() == type);
 	}
-		
+	
+
 	/* Returns a random enchantment */
 	public static Enchantment getRandomEnchantment() {
-		return Enchantment.values()[(int) (Math.random()*Enchantment.values().length)];
+		//return Enchantment.values()[(int) (Math.random()*Enchantment.values().length)];
+		ArrayList<Enchantment> enchants = new ArrayList<Enchantment>(Arrays.asList(Enchantment.LOOT_BONUS_BLOCKS, Enchantment.SILK_TOUCH));
+		return enchants.get(new Random().nextInt(enchants.size()));
 	}
 	
 	// If item already has enchantment, stack the level
@@ -166,39 +169,6 @@ public final class Utils {
 			int currentLevel, 
 			int levelCap) {
 		if (currentLevel > 0) {
-			// level cap
-			if (currentLevel < levelCap) {
-				item.addUnsafeEnchantment(enchant, currentLevel+1);
-			}
-		}
-		else
-			item.addUnsafeEnchantment(enchant, 1);
-		
-		return item;
-	}
-	
-	// If item already has enchantment, stack the level
-	// if not, add new enchant
-	// if item has silk touch, dont add fortune,
-	// vice versa
-	public static ItemStack addOrStackEnchantmentFOST(ItemStack item, 
-			Enchantment enchant, 
-			int currentLevel, 
-			int levelCap) {
-		
-		// If item has fortune, dont add silk touch
-		if (item.containsEnchantment(Enchantment.LOOT_BONUS_BLOCKS)
-				&& enchant == Enchantment.SILK_TOUCH) {
-			item.addUnsafeEnchantment(Enchantment.LOOT_BONUS_BLOCKS, 
-					item.getEnchantmentLevel(Enchantment.LOOT_BONUS_BLOCKS)+1);
-		}
-		// If item has silk touch, dont add fortune
-		else if (item.containsEnchantment(Enchantment.SILK_TOUCH)
-				&& enchant == Enchantment.LOOT_BONUS_BLOCKS) {
-			item.addUnsafeEnchantment(Enchantment.SILK_TOUCH, 
-					item.getEnchantmentLevel(Enchantment.SILK_TOUCH)+1);
-		}
-		else if (currentLevel > 0) {
 			// level cap
 			if (currentLevel < levelCap) {
 				item.addUnsafeEnchantment(enchant, currentLevel+1);

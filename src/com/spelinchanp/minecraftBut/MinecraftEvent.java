@@ -86,7 +86,7 @@ public class MinecraftEvent {
 				// get tools without null space
 				List<ItemStack> tools = Utils.getInventoryTools(inventory);
 				// get armor without null space
-				List<ItemStack> armor = Utils.getInventoryTools(inventory);
+				List<ItemStack> armor = Utils.getNonNullArmor(inventory);
 					
 				int activeToolsSize = tools.size();
 				int activeArmorSize = armor.size();
@@ -116,14 +116,37 @@ public class MinecraftEvent {
 						
 				}
 				// pick other
-				else if (tools.size() != 0) {
+				if (tools.size() != 0) {
 					ItemStack item = tools.get(new Random().nextInt(tools.size()));
 						
 					Enchantment newEnchant = Utils.getRandomEnchantment();
-					ItemStack newItem = Utils.addOrStackEnchantmentFOST(item, 
-							newEnchant, 
-							item.getEnchantmentLevel(newEnchant), 
-							100);
+					ItemStack newItem;
+					//Enchantment newEnchant = Enchantment.SILK_TOUCH;
+					if (item.containsEnchantment(Enchantment.LOOT_BONUS_BLOCKS) 
+							&& newEnchant == Enchantment.SILK_TOUCH) {
+						Bukkit.broadcastMessage("FORTUNE");
+						
+						newItem = Utils.addOrStackEnchantment(item, 
+								Enchantment.LOOT_BONUS_BLOCKS, 
+								item.getEnchantmentLevel(Enchantment.LOOT_BONUS_BLOCKS), 
+								100);
+					}
+					else if (item.containsEnchantment(Enchantment.SILK_TOUCH) 
+							&& newEnchant == Enchantment.LOOT_BONUS_BLOCKS) {
+						Bukkit.broadcastMessage("SILK TOUCH");
+						
+						newItem = Utils.addOrStackEnchantment(item, 
+								Enchantment.SILK_TOUCH, 
+								item.getEnchantmentLevel(Enchantment.SILK_TOUCH), 
+								100);
+					}
+					else {
+						newItem = Utils.addOrStackEnchantment(item, 
+								newEnchant, 
+								item.getEnchantmentLevel(newEnchant), 
+								100);
+					}
+					
 						
 					inventory.remove(item);
 					inventory.addItem(newItem);
