@@ -157,9 +157,7 @@ public final class Utils {
 
 	/* Returns a random enchantment */
 	public static Enchantment getRandomEnchantment() {
-		//return Enchantment.values()[(int) (Math.random()*Enchantment.values().length)];
-		ArrayList<Enchantment> enchants = new ArrayList<Enchantment>(Arrays.asList(Enchantment.LOOT_BONUS_BLOCKS, Enchantment.SILK_TOUCH));
-		return enchants.get(new Random().nextInt(enchants.size()));
+		return LootTablesEnchants.allEnchants.get(new Random().nextInt(LootTablesEnchants.allEnchants.size()));
 	}
 	
 	// If item already has enchantment, stack the level

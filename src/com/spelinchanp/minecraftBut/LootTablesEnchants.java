@@ -9,6 +9,8 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 
 public class LootTablesEnchants {
+	public static ArrayList<Enchantment> allEnchants = loadEnchants();
+	
 	public static ArrayList<Enchantment> luckyFishingBowEnchants = loadLuckyFishingBowEnchants();
 	public static ArrayList<Enchantment> luckyFishingRodEnchants = loadLuckyFishingRodEnchants();
 	public static ArrayList<Enchantment> luckyFishingBookEnchants = loadLuckyFishingBookEnchants();
@@ -17,7 +19,48 @@ public class LootTablesEnchants {
 		return luckyFishingBookEnchants.get(new Random().nextInt(luckyFishingBookEnchants.size()));
 	}
 	
-	
+	private static ArrayList<Enchantment> loadEnchants() {
+		return new ArrayList<Enchantment>(
+				Arrays.asList(
+						Enchantment.ARROW_DAMAGE,
+						Enchantment.ARROW_FIRE,
+						Enchantment.ARROW_INFINITE,
+						Enchantment.ARROW_KNOCKBACK,
+						Enchantment.BINDING_CURSE,
+						Enchantment.CHANNELING,
+						Enchantment.DAMAGE_ALL,
+						Enchantment.DAMAGE_ARTHROPODS,
+						Enchantment.DAMAGE_UNDEAD,
+						Enchantment.DEPTH_STRIDER,
+						Enchantment.DIG_SPEED,
+						Enchantment.DURABILITY,
+						Enchantment.FIRE_ASPECT,
+						Enchantment.FROST_WALKER,
+						Enchantment.IMPALING,
+						Enchantment.KNOCKBACK,
+						Enchantment.LOOT_BONUS_BLOCKS,
+						Enchantment.LOOT_BONUS_MOBS,
+						Enchantment.LOYALTY,
+						Enchantment.LUCK,
+						Enchantment.LOYALTY,
+						Enchantment.MENDING,
+						Enchantment.MULTISHOT,
+						Enchantment.OXYGEN,
+						Enchantment.PIERCING,
+						Enchantment.PROTECTION_ENVIRONMENTAL,
+						Enchantment.PROTECTION_EXPLOSIONS,
+						Enchantment.PROTECTION_FALL,
+						Enchantment.PROTECTION_FIRE,
+						Enchantment.PROTECTION_PROJECTILE,
+						Enchantment.QUICK_CHARGE,
+						Enchantment.RIPTIDE,
+						Enchantment.SILK_TOUCH,
+						Enchantment.SOUL_SPEED,
+						Enchantment.SWEEPING_EDGE,
+						Enchantment.THORNS,
+						Enchantment.VANISHING_CURSE,
+						Enchantment.WATER_WORKER));
+	}
 	
 	private static ArrayList<Enchantment> loadLuckyFishingBowEnchants() {
 		// In the future read this from a config file
@@ -50,32 +93,32 @@ public class LootTablesEnchants {
 		        		Enchantment.ARROW_DAMAGE,
 		        		Enchantment.ARROW_INFINITE,
 		        		Enchantment.CHANNELING,
-		        		Enchantment.DAMAGE_ALL
-//		        		Enchantment.DEPTH_STRIDER,
-//		        		Enchantment.FIRE_ASPECT,
-//		        		Enchantment.FROST_WALKER,
-//		        		Enchantment.IMPALING,
-//		        		Enchantment.KNOCKBACK,
-//		        		Enchantment.LOOT_BONUS_BLOCKS,
-//		        		Enchantment.LOOT_BONUS_MOBS,
-//		        		Enchantment.LOYALTY,
-//		        		Enchantment.LUCK,
-//		        		Enchantment.LURE,
-//		        		Enchantment.MULTISHOT,
-//		        		Enchantment.OXYGEN,
-//		        		Enchantment.PIERCING,
-//		        		Enchantment.PROTECTION_ENVIRONMENTAL,
-//		        		Enchantment.PROTECTION_EXPLOSIONS,
-//		        		Enchantment.PROTECTION_FALL,
-//		        		Enchantment.PROTECTION_FIRE,
-//		        		Enchantment.PROTECTION_PROJECTILE,
-//		        		Enchantment.QUICK_CHARGE,
-//		        		Enchantment.RIPTIDE,
-//		        		Enchantment.SILK_TOUCH,
-//		        		Enchantment.SOUL_SPEED,
-//		        		Enchantment.SWEEPING_EDGE,
-//		        		Enchantment.THORNS,
-//		        		Enchantment.WATER_WORKER
+		        		Enchantment.DAMAGE_ALL,
+		        		Enchantment.DEPTH_STRIDER,
+		        		Enchantment.FIRE_ASPECT,
+		        		Enchantment.FROST_WALKER,
+		        		Enchantment.IMPALING,
+		        		Enchantment.KNOCKBACK,
+		        		Enchantment.LOOT_BONUS_BLOCKS,
+		        		Enchantment.LOOT_BONUS_MOBS,
+		        		Enchantment.LOYALTY,
+		        		Enchantment.LUCK,
+		        		Enchantment.LURE,
+		        		Enchantment.MULTISHOT,
+		        		Enchantment.OXYGEN,
+		        		Enchantment.PIERCING,
+		        		Enchantment.PROTECTION_ENVIRONMENTAL,
+		        		Enchantment.PROTECTION_EXPLOSIONS,
+		        		Enchantment.PROTECTION_FALL,
+		        		Enchantment.PROTECTION_FIRE,
+		        		Enchantment.PROTECTION_PROJECTILE,
+		        		Enchantment.QUICK_CHARGE,
+		        		Enchantment.RIPTIDE,
+		        		Enchantment.SILK_TOUCH,
+		        		Enchantment.SOUL_SPEED,
+		        		Enchantment.SWEEPING_EDGE,
+		        		Enchantment.THORNS,
+		        		Enchantment.WATER_WORKER
 		        		));
 	}
 	
