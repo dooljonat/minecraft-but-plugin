@@ -13,6 +13,7 @@ import org.bukkit.block.Block;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.plugin.Plugin;
 
@@ -45,9 +46,9 @@ public final class Utils {
 	}
 	
 	/* Function to get every item in a player's inventory, excluding null/empty slots and armor */
-	public static List<ItemStack> getNonNullInventory(Player player) {
+	public static List<ItemStack> getNonNullInventory(PlayerInventory inventory) {
 		List<ItemStack> stack = new ArrayList<ItemStack>();
-		for (ItemStack i : player.getInventory().getStorageContents()) {
+		for (ItemStack i : inventory.getStorageContents()) {
 			if (i != null) {
 				stack.add(i);
 			}
@@ -55,9 +56,29 @@ public final class Utils {
 		return stack;
 	}
 	
-	public static List<ItemStack> getNonNullArmor(Player player) {
+	/* Function to get every tool in a player's inventory, excluding null/empty slots and armor */
+	public static List<ItemStack> getInventoryTools(PlayerInventory inventory) {
 		List<ItemStack> stack = new ArrayList<ItemStack>();
-		for (ItemStack i : player.getInventory().getArmorContents()) {
+		for (ItemStack i : inventory.getStorageContents()) {
+			if (i != null) {
+				String type = i.getType().toString();
+				if (type.endsWith("_PICKAXE") ||
+						type.endsWith("_SHOVEL") ||
+						type.endsWith("_SWORD") ||
+						type.endsWith("_AXE") ||
+						type.endsWith("_HOE") ||
+						type == "SHEARS") {
+					stack.add(i);
+				}
+			}
+		}
+		return stack;
+	}
+	
+	/* Function to get armor contents of player */
+	public static List<ItemStack> getNonNullArmor(PlayerInventory inventory) {
+		List<ItemStack> stack = new ArrayList<ItemStack>();
+		for (ItemStack i : inventory.getArmorContents()) {
 			if (i != null) {
 				stack.add(i);
 			}
@@ -132,10 +153,13 @@ public final class Utils {
 	{
 	    return (item == null ? false : item.getType() == type);
 	}
-		
+	
+
 	/* Returns a random enchantment */
 	public static Enchantment getRandomEnchantment() {
-		return Enchantment.values()[(int) (Math.random()*Enchantment.values().length)];
+		//return Enchantment.values()[(int) (Math.random()*Enchantment.values().length)];
+		ArrayList<Enchantment> enchants = new ArrayList<Enchantment>(Arrays.asList(Enchantment.LOOT_BONUS_BLOCKS, Enchantment.SILK_TOUCH));
+		return enchants.get(new Random().nextInt(enchants.size()));
 	}
 	
 	// If item already has enchantment, stack the level
@@ -144,40 +168,6 @@ public final class Utils {
 			Enchantment enchant, 
 			int currentLevel, 
 			int levelCap) {
-		if (currentLevel > 0) {
-			// level cap
-			if (currentLevel < levelCap) {
-				item.addUnsafeEnchantment(enchant, currentLevel+1);
-			}
-		}
-		else
-			item.addUnsafeEnchantment(enchant, 1);
-		
-		return item;
-	}
-	
-	// If item already has enchantment, stack the level
-	// if not, add new enchant
-	// if item has silk touch, dont add fortune,
-	// vice versa
-	public static ItemStack addOrStackEnchantmentFOST(ItemStack item, 
-			Enchantment enchant, 
-			int currentLevel, 
-			int levelCap) {
-		
-		// If item has fortune, dont add silk touch
-		if (item.containsEnchantment(Enchantment.LOOT_BONUS_BLOCKS)
-				&& enchant == Enchantment.SILK_TOUCH) {
-			item.addUnsafeEnchantment(Enchantment.LOOT_BONUS_BLOCKS, 
-					item.getEnchantmentLevel(Enchantment.LOOT_BONUS_BLOCKS));
-		}
-		// If item has silk touch, dont add fortune
-		else if (item.containsEnchantment(Enchantment.SILK_TOUCH)
-				&& enchant == Enchantment.LOOT_BONUS_BLOCKS) {
-			item.addUnsafeEnchantment(Enchantment.SILK_TOUCH, 
-					item.getEnchantmentLevel(Enchantment.SILK_TOUCH));
-		}
-		
 		if (currentLevel > 0) {
 			// level cap
 			if (currentLevel < levelCap) {

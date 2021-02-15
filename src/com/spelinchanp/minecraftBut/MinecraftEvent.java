@@ -62,7 +62,6 @@ public class MinecraftEvent {
 				}
 			}		
 			timesRun++;
-			Bukkit.broadcastMessage(String.valueOf(timesRun));
 			if (timesRun == 3) {
 				cancel();
 				tntRainRunnable = null;
@@ -84,14 +83,14 @@ public class MinecraftEvent {
 				// get actual inventory
 				PlayerInventory inventory = players.get(i).getInventory();
 					
-				// get inventory without null space
-				List<ItemStack> inv = Utils.getNonNullInventory(players.get(i));
+				// get tools without null space
+				List<ItemStack> tools = Utils.getInventoryTools(inventory);
 				// get armor without null space
-				List<ItemStack> armor = Utils.getNonNullArmor(players.get(i));
+				List<ItemStack> armor = Utils.getNonNullArmor(inventory);
 					
-				int activeInvSize = inv.size();
+				int activeToolsSize = tools.size();
 				int activeArmorSize = armor.size();
-				int totalActiveSize = activeInvSize+activeArmorSize;
+				int totalActiveSize = activeToolsSize+activeArmorSize;
 					
 				// generate random number to pick armor or item
 				double num = Utils.getRandomDoubleRange(0, totalActiveSize);
@@ -117,21 +116,43 @@ public class MinecraftEvent {
 						
 				}
 				// pick other
-				else if (inv.size() != 0) {
-					ItemStack item = inv.get(new Random().nextInt(inv.size()));
+				if (tools.size() != 0) {
+					ItemStack item = tools.get(new Random().nextInt(tools.size()));
 						
 					Enchantment newEnchant = Utils.getRandomEnchantment();
-					ItemStack newItem = Utils.addOrStackEnchantmentFOST(item, 
-							newEnchant, 
-							item.getEnchantmentLevel(newEnchant), 
-							100);
+					ItemStack newItem;
+					//Enchantment newEnchant = Enchantment.SILK_TOUCH;
+					if (item.containsEnchantment(Enchantment.LOOT_BONUS_BLOCKS) 
+							&& newEnchant == Enchantment.SILK_TOUCH) {
+						Bukkit.broadcastMessage("FORTUNE");
+						
+						newItem = Utils.addOrStackEnchantment(item, 
+								Enchantment.LOOT_BONUS_BLOCKS, 
+								item.getEnchantmentLevel(Enchantment.LOOT_BONUS_BLOCKS), 
+								100);
+					}
+					else if (item.containsEnchantment(Enchantment.SILK_TOUCH) 
+							&& newEnchant == Enchantment.LOOT_BONUS_BLOCKS) {
+						Bukkit.broadcastMessage("SILK TOUCH");
+						
+						newItem = Utils.addOrStackEnchantment(item, 
+								Enchantment.SILK_TOUCH, 
+								item.getEnchantmentLevel(Enchantment.SILK_TOUCH), 
+								100);
+					}
+					else {
+						newItem = Utils.addOrStackEnchantment(item, 
+								newEnchant, 
+								item.getEnchantmentLevel(newEnchant), 
+								100);
+					}
+					
 						
 					inventory.remove(item);
 					inventory.addItem(newItem);
 				}
 			}
 			timesRun++;
-			Bukkit.broadcastMessage(String.valueOf(timesRun));
 			if (timesRun == 30) {
 				cancel();
 				randomEnchantsRunnable = null;
