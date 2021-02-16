@@ -101,6 +101,7 @@ public class LootTablesBlocks {
 						Material.DEAD_HORN_CORAL_BLOCK,
 						Material.DEAD_TUBE_CORAL_BLOCK,
 						Material.DIAMOND_ORE,
+						Material.DIAMOND_BLOCK,
 						Material.DIORITE,
 						Material.DIRT,
 						Material.DISPENSER,

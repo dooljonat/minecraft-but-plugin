@@ -10,11 +10,14 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.CreatureSpawner;
 import org.bukkit.entity.Egg;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
+import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import org.bukkit.event.player.PlayerEggThrowEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -59,7 +62,7 @@ public class MinecraftButListener implements Listener {
 	}
 	
 	@EventHandler
-	public void EggBreakEvent(ProjectileHitEvent e) {
+	public void EggsOP(ProjectileHitEvent e) {
 		if (ButEvent.butEvent == ButEvents.EggsOP) {
 			if (e.getEntity() instanceof Egg) {
 				Egg egg = (Egg) e.getEntity();
@@ -76,8 +79,6 @@ public class MinecraftButListener implements Listener {
 					Bukkit.broadcastMessage(String.valueOf(timer));
 				}
 			}
-			
-
 		}
 	}
 }

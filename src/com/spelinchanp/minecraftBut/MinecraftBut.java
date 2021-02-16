@@ -39,7 +39,7 @@ public class MinecraftBut extends JavaPlugin {
 					public void run() {
 						// Randomly select a new event
 						ButEvent.setRandomButEvent(); 
-						//ButEvent.butEvent = ButEvents.RandomEnchants;
+						//ButEvent.butEvent = ButEvents.MobsStacked;
 						
 						// Instantiate MinecraftEvent
 						// (all other listener-based events are run in MinecraftButListener)
@@ -66,6 +66,10 @@ public class MinecraftBut extends JavaPlugin {
 									ChatColor.BLUE + "Random enchants has commenced! A random item in your inventory"
 											+ " will be given a random enchantment every three seconds");
 							break;
+						case MobsStacked:
+							Bukkit.broadcastMessage(
+									ChatColor.DARK_GRAY + "Mob stacking has commenced! "
+											+ "Every mob has spawns will now be stacked!");
 						}
 					}
 				}, 1, 20 * 30);

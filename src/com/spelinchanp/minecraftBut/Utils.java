@@ -2,6 +2,7 @@ package com.spelinchanp.minecraftBut;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -11,6 +12,7 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -178,6 +180,7 @@ public final class Utils {
 		return item;
 	}
 	
+	/*Add usable enchantments to books*/
 	public static ItemStack addBookEnchantment(ItemStack item, Enchantment enchantment, int level){
         EnchantmentStorageMeta meta = (EnchantmentStorageMeta) item.getItemMeta();
         meta.addStoredEnchant(enchantment, level, true);
@@ -185,4 +188,50 @@ public final class Utils {
         return item;
     }
 	
+	/* Get all entities in a specific radius around a location*/
+	public static List<Entity> getEntitiesAroundPoint(Location location, double radius) {	
+	    List<Entity> entities = new ArrayList<Entity>();
+	    World world = location.getWorld();
+
+	    // To find chunks we use chunk coordinates (not block coordinates!)
+	    int smallX = (int) Math.floor((location.getX() - radius) / 16.0D);
+	    int bigX = (int) Math.floor((location.getX() + radius) / 16.0D);
+	    int smallZ = (int) Math.floor((location.getZ() - radius) / 16.0D);
+	    int bigZ = (int) Math.floor((location.getZ() + radius) / 16.0D);
+
+	    for (int x = smallX; x <= bigX; x++) {
+	        for (int z = smallZ; z <= bigZ; z++) {
+	            if (world.isChunkLoaded(x, z)) {
+	                entities.addAll(Arrays.asList(world.getChunkAt(x, z).getEntities())); // Add all entities from this chunk to the list
+	            }
+	        }
+	    }
+
+	    Iterator<Entity> entityIterator = entities.iterator(); // Create an iterator so we can loop through the list while removing entries
+	    while (entityIterator.hasNext()) {
+	        if (entityIterator.next().getLocation().distanceSquared(location) > radius * radius) { // If the entity is outside of the sphere...
+	            entityIterator.remove(); // Remove it
+	        }
+	    }
+	    return entities;
+	}
+	
+	/* Recursive function to add passengers to an entity */
+	public static void addPassengers(Entity entity, int amount) {
+		World world = entity.getWorld();
+		Location loc = entity.getLocation();
+		
+		if (amount > 0) {
+			Entity newEntity = world.spawnEntity(loc, entity.getType());
+			newEntity.setCustomName("Stacker");
+			entity.addPassenger(newEntity);	
+			//Bukkit.broadcastMessage("Stacked a " + entity.getType().toString());
+			
+			addPassengers(newEntity, amount-1);
+		}
+		else {
+			return;
+		}
+		
+	}
 }
