@@ -39,7 +39,7 @@ public class MinecraftBut extends JavaPlugin {
 					public void run() {
 						// Randomly select a new event
 						ButEvent.setRandomButEvent(); 
-						//ButEvent.butEvent = ButEvents.MobsStacked;
+						//ButEvent.butEvent = ButEvents.GlassSkyWalker;
 						
 						// Instantiate MinecraftEvent
 						// (all other listener-based events are run in MinecraftButListener)
@@ -70,6 +70,10 @@ public class MinecraftBut extends JavaPlugin {
 							Bukkit.broadcastMessage(
 									ChatColor.DARK_GRAY + "Mob stacking has commenced! "
 											+ "Every mob has spawns will now be stacked!");
+							break;
+						case GlassSkyWalker:
+							Bukkit.broadcastMessage(
+									ChatColor.WHITE + "Glass sky walker has commenced!");
 							break;
 						}
 					}
