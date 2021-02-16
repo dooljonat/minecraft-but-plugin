@@ -60,6 +60,7 @@ public class LootTablesEnchants {
 						Enchantment.THORNS,
 						Enchantment.VANISHING_CURSE,
 						Enchantment.WATER_WORKER));
+						Enchantment.DAMAGE_ARTHROPODS));
 	}
 	
 	private static ArrayList<Enchantment> loadLuckyFishingBowEnchants() {

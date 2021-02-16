@@ -70,6 +70,7 @@ public class MinecraftBut extends JavaPlugin {
 							Bukkit.broadcastMessage(
 									ChatColor.DARK_GRAY + "Mob stacking has commenced! "
 											+ "Every mob has spawns will now be stacked!");
+							break;
 						}
 					}
 				}, 1, 20 * 30);
