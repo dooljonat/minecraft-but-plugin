@@ -59,7 +59,30 @@ public class MinecraftButListener implements Listener {
 	}
 	
 	@EventHandler
+<<<<<<< Updated upstream
 	public void EggBreakEvent(ProjectileHitEvent e) {
+=======
+	public void GlassSkyWalker(PlayerMoveEvent e ) {
+		if (ButEvent.butEvent == ButEvents.GlassSkyWalker) {
+			Player player = e.getPlayer();
+			Block block = player.getLocation().getBlock().getRelative(BlockFace.DOWN);
+			
+			if (block.getType() == Material.AIR) {
+				Material mat = Material.AIR;
+				
+				mat = LootTablesBlocks
+						.stainedGlassBLocks
+						.get(new Random().nextInt(
+								LootTablesBlocks.stainedGlassBLocks.size()));
+				
+				block.setType(mat);
+			}
+		}
+	}
+	
+	@EventHandler
+	public void EggsOP(ProjectileHitEvent e) {
+>>>>>>> Stashed changes
 		if (ButEvent.butEvent == ButEvents.EggsOP) {
 			if (e.getEntity() instanceof Egg) {
 				Egg egg = (Egg) e.getEntity();

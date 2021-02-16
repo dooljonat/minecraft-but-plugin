@@ -13,6 +13,11 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.enchantments.Enchantment;
+<<<<<<< Updated upstream
+=======
+import org.bukkit.entity.Arrow;
+import org.bukkit.entity.Entity;
+>>>>>>> Stashed changes
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.TNTPrimed;
@@ -180,4 +185,47 @@ public class MinecraftEvent {
 		}
 	};
 	
+<<<<<<< Updated upstream
+=======
+	private BukkitRunnable mobsStackedRunnable = null;
+	private BukkitRunnable mobsStacked = new BukkitRunnable() {
+		int timesRun = 0;
+		
+		@Override
+		public void run() {
+			List<Player> players = new ArrayList<>(Bukkit.getOnlinePlayers());
+			
+			for (int i = 0; i < players.size(); i++) {				
+				List<Entity> nearbyEntities = Utils.getEntitiesAroundPoint(players.get(i).getLocation(), 45);
+				for (int j = 0; j < nearbyEntities.size(); j++) {
+					Entity entity = nearbyEntities.get(j);
+					if (entity.getPassengers().isEmpty() &&
+							entity.getCustomName() == null &&
+							!entity.getType().equals(EntityType.PLAYER) &&
+							!entity.getType().equals(EntityType.SQUID) &&
+							!entity.getType().equals(EntityType.BAT) &&
+							!(entity instanceof Item) &&
+							!(entity instanceof Arrow)) {
+						World world = entity.getWorld();
+						Location loc = entity.getLocation();
+						entity.setCustomName("Stacked");
+						
+						// fix it so that it adds to the stack, not adds multiple entities to second layer
+						int numToStack = Utils.getRandomIntRange(3, 15);
+						Utils.addPassengers(entity, numToStack);
+					}
+				}
+			}
+			
+			timesRun++;
+			if (timesRun == 30) {
+				cancel();
+				randomEnchantsRunnable = null;
+			}
+		}
+		
+	};
+	
+	
+>>>>>>> Stashed changes
 }
