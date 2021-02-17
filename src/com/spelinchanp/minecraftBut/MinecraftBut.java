@@ -38,8 +38,8 @@ public class MinecraftBut extends JavaPlugin {
 					@Override
 					public void run() {
 						// Randomly select a new event
-						ButEvent.setRandomButEvent(); 
-						//ButEvent.butEvent = ButEvents.GlassSkyWalker;
+						//ButEvent.setRandomButEvent(); 
+						ButEvent.butEvent = ButEvents.SilverfishInfestedBlocks;
 						
 						// Instantiate MinecraftEvent
 						// (all other listener-based events are run in MinecraftButListener)
@@ -74,6 +74,9 @@ public class MinecraftBut extends JavaPlugin {
 						case GlassSkyWalker:
 							Bukkit.broadcastMessage(
 									ChatColor.WHITE + "Glass sky walker has commenced!");
+							break;
+						case SilverfishInfestedBlocks: 
+							Bukkit.broadcastMessage(ChatColor.GRAY + "Silverfish infested blocks has commenced!");
 							break;
 						}
 					}
