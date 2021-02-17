@@ -69,7 +69,8 @@ public final class Utils {
 						type.endsWith("_SWORD") ||
 						type.endsWith("_AXE") ||
 						type.endsWith("_HOE") ||
-						type == "SHEARS") {
+						type == "SHEARS" ||
+				        type == "BOW"){
 					stack.add(i);
 				}
 			}

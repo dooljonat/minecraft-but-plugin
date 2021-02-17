@@ -64,14 +64,14 @@ public class MinecraftButListener implements Listener {
 	}
 	
 	@EventHandler 
-	public void SilverfishInfestedBlocks(BlockBreakEvent e) {
-		if (ButEvent.butEvent == ButEvents.SilverfishInfestedBlocks) {
+	public void EndermiteInfestedBlocks(BlockBreakEvent e) {
+		if (ButEvent.butEvent == ButEvents.EndermiteInfestedBlocks) {
 			Block block = e.getBlock();
 			
 			World world = block.getWorld();
 			Location loc = block.getLocation();
 			
-			Entity newEntity = world.spawnEntity(loc, EntityType.SILVERFISH);
+			Entity newEntity = world.spawnEntity(loc, EntityType.ENDERMITE);
 		}
 	}
 	
