@@ -11,7 +11,7 @@ public enum ButEvents {
 	RandomBlocksWalking,
 	// RandomBlocksLooking
 	GlassSkyWalker,
-	SilverfishInfestedBlocks
+	EndermiteInfestedBlocks
 	// GravitizedLeaves
 	// FloorIsLava
 }

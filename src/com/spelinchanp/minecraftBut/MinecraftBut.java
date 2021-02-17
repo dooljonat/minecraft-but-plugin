@@ -75,8 +75,8 @@ public class MinecraftBut extends JavaPlugin {
 							Bukkit.broadcastMessage(
 									ChatColor.WHITE + "Glass sky walker has commenced!");
 							break;
-						case SilverfishInfestedBlocks: 
-							Bukkit.broadcastMessage(ChatColor.GRAY + "Silverfish infested blocks has commenced!");
+						case EndermiteInfestedBlocks: 
+							Bukkit.broadcastMessage(ChatColor.GRAY + "Endermite infested blocks has commenced!");
 							break;
 						}
 					}
