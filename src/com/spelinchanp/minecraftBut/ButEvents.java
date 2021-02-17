@@ -10,7 +10,8 @@ public enum ButEvents {
 	MobsStacked,
 	RandomBlocksWalking,
 	// RandomBlocksLooking
-	GlassSkyWalker
-	// SilverfishInfestedBlocks
+	GlassSkyWalker,
+	SilverfishInfestedBlocks
 	// GravitizedLeaves
+	// FloorIsLava
 }

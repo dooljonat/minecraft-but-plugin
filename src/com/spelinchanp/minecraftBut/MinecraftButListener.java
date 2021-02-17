@@ -5,6 +5,7 @@ import java.util.Random;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
@@ -15,6 +16,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
@@ -58,6 +60,18 @@ public class MinecraftButListener implements Listener {
 					blockState.update();
 				}
 			}
+		}
+	}
+	
+	@EventHandler 
+	public void SilverfishInfestedBlocks(BlockBreakEvent e) {
+		if (ButEvent.butEvent == ButEvents.SilverfishInfestedBlocks) {
+			Block block = e.getBlock();
+			
+			World world = block.getWorld();
+			Location loc = block.getLocation();
+			
+			Entity newEntity = world.spawnEntity(loc, EntityType.SILVERFISH);
 		}
 	}
 	
