@@ -7,17 +7,20 @@ import java.util.List;
 import java.util.Random;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.scheduler.BukkitRunnable;
 
 public final class Utils {
 	private static Plugin plugin = Bukkit.getPluginManager().getPlugin("MinecraftBut");
@@ -234,5 +237,72 @@ public final class Utils {
 			return;
 		}
 		
+	}
+	
+	/* Get nearby blocks */
+	public static List<Block> getNearbyBlocks(Location loc, int radius) {
+		List<Block> blocks = new ArrayList<Block>();
+		World world = loc.getWorld();
+		
+		// get nearby blocks
+		for (int x = loc.getBlockX() - radius; x <= loc.getBlockX() + radius; x++) {
+			for (int z = loc.getBlockZ() - radius; z <= loc.getBlockZ() + radius; z++) {
+				for (int y = loc.getBlockY() - radius; y <= loc.getBlockY() + radius; y++) {
+					Block block = world.getBlockAt(x, y, z);
+					if (block != null &&
+						!block.getType().equals(Material.AIR)) {
+						blocks.add(block);
+					}
+				}
+			}
+		}
+		
+		return blocks;
+	}
+	
+	/* Get nearby blocks of a specific type */
+	public static List<Block> getNearbyBlocks(Location loc, int radius, Material type) {
+		List<Block> blocks = new ArrayList<Block>();
+		World world = loc.getWorld();
+		
+		// get nearby blocks of a specific type
+		for (int x = loc.getBlockX() - radius; x <= loc.getBlockX() + radius; x++) {
+			for (int z = loc.getBlockZ() - radius; z <= loc.getBlockZ() + radius; z++) {
+				for (int y = loc.getBlockY() - radius; y <= loc.getBlockY() + radius; y++) {
+					Block block = world.getBlockAt(x, y, z);
+					if (block != null &&
+						block.getType() == type) {
+						blocks.add(block);
+					}
+				}
+			}
+		}
+		
+		return blocks;
+	}
+	
+	/* Get nearby blocks of a general type based on their string suffix */
+	/* ex: all material leaves end with "_LEAVES" */
+	public static List<Block> getNearbyBlocks(Location loc, int radius, String suffix) {
+		List<Block> blocks = new ArrayList<Block>();
+		World world = loc.getWorld();
+		
+		// get nearby blocks of a specific type
+		for (int x = loc.getBlockX() - radius; x <= loc.getBlockX() + radius; x++) {
+			for (int z = loc.getBlockZ() - radius; z <= loc.getBlockZ() + radius; z++) {
+				for (int y = loc.getBlockY() - radius; y <= loc.getBlockY() + radius; y++) {
+					Block block = world.getBlockAt(x, y, z);
+					if (block != null) {
+						String type = block.getType().toString();
+						
+						if (type.endsWith(suffix)) {
+							blocks.add(block);
+						}
+					}
+				}
+			}
+		}
+		
+		return blocks;
 	}
 }
