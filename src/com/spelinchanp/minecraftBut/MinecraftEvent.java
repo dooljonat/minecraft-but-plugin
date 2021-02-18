@@ -12,11 +12,13 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.block.Block;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.TNTPrimed;
@@ -24,6 +26,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.material.MaterialData;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitScheduler;
@@ -46,6 +49,10 @@ public class MinecraftEvent {
 		else if (event == ButEvents.MobsStacked) {
 			mobsStackedRunnable = mobsStacked;
 			mobsStackedRunnable.runTaskTimer(plugin, 0, 20*2);
+		}
+		else if (event == ButEvents.GravitizedLeaves) {
+			gravitizedLeavesRunnable = gravitizedLeaves;
+			gravitizedLeavesRunnable.runTaskTimer(plugin, 0, 20*3);
 		}
 		
 	}
@@ -74,6 +81,37 @@ public class MinecraftEvent {
 			if (timesRun == 3) {
 				cancel();
 				tntRainRunnable = null;
+			}
+		}
+	};
+	
+	private BukkitRunnable gravitizedLeavesRunnable = null;
+	private BukkitRunnable gravitizedLeaves = new BukkitRunnable() {
+		int timesRun = 0;
+		
+		@Override
+		public void run() {
+			Bukkit.broadcastMessage(ChatColor.GREEN + "Gravitized leaves!");
+			// Gravitize all the leaves around the player every three seconds
+			
+			List<Player> players = new ArrayList<>(Bukkit.getOnlinePlayers());
+			
+			for (int i = 0; i < players.size(); i++) {
+				World world = players.get(i).getWorld();
+				Location playerLoc = players.get(i).getLocation();
+				List<Block> nearbyBlocks = Utils.getNearbyBlocks(playerLoc, 15, "_LEAVES");
+				
+				for (int j = 0; j < nearbyBlocks.size(); j++) {
+					Block block = nearbyBlocks.get(j);
+					
+					world.spawnFallingBlock(block.getLocation(), block.getBlockData());
+					block.setType(Material.AIR);
+				}
+			}		
+			timesRun++;
+			if (timesRun == 10) {
+				cancel();
+				gravitizedLeavesRunnable = null;
 			}
 		}
 	};

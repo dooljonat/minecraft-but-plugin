@@ -39,7 +39,7 @@ public class MinecraftBut extends JavaPlugin {
 					public void run() {
 						// Randomly select a new event
 						ButEvent.setRandomButEvent(); 
-						//ButEvent.butEvent = ButEvents.SilverfishInfestedBlocks;
+						//ButEvent.butEvent = ButEvents.GravitizedLeaves;
 						
 						// Instantiate MinecraftEvent
 						// (all other listener-based events are run in MinecraftButListener)
@@ -78,6 +78,8 @@ public class MinecraftBut extends JavaPlugin {
 						case EndermiteInfestedBlocks: 
 							Bukkit.broadcastMessage(ChatColor.GRAY + "Endermite infested blocks has commenced!");
 							break;
+						case GravitizedLeaves:
+							Bukkit.broadcastMessage(ChatColor.GREEN + "Gravitized leaves has commenced!");
 						}
 					}
 				}, 1, 20 * 30);
