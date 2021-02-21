@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.bukkit.Material;
-import org.bukkit.block.Block;
-import org.bukkit.enchantments.Enchantment;
 
 public class LootTablesBlocks {
 	public static ArrayList<Material> stainedGlassBLocks = loadStainedGlassBlocks();

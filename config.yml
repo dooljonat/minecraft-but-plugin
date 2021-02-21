@@ -1,0 +1,30 @@
+# enable and disable certain events
+enabled:
+  tnt-rain: true
+  eggs-op: false
+  random-enchants: true
+  mobs-stacked: true
+  random-blocks-walking: true
+  glass-sky-walker: true
+  endermite-infested-blocks: true
+  #WARNING: gravitized leaves may slow server
+  gravitized-leaves: true
+
+# settings related to the timing and execution of events
+timer:
+  # how many are active at a given point
+  how-many-active: 1
+  # how often the timer runs to switch the events (in seconds)
+  how-often-change: 30
+  # how many change every time the timer switches
+  how-many-change: 1
+
+# event-specific settings
+tnt-rain:
+  # set to false if you don't want tnt to damage blocks
+  grief: false 
+  # how often tnt spawns at the player every timer run
+  spawn-rate: 3
+random-enchants:
+  level-cap: 100
+

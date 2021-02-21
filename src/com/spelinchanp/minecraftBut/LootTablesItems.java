@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.Random;
 
 import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
 
 public class LootTablesItems {
 	public static ArrayList<Material> luckyFishingLootTable = loadLuckyFishingLootTable();
