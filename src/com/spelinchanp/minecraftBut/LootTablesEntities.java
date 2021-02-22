@@ -3,7 +3,6 @@ package com.spelinchanp.minecraftBut;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 
 public class LootTablesEntities {

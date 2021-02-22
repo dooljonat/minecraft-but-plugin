@@ -1,14 +1,23 @@
 package com.spelinchanp.minecraftBut;
 
-public final class ButEvent {
-	public static ButEvents butEvent;
+import java.util.Random;
+
+public class ButEvent {
+	private Settings settings;
+	
+	public ButEvents butEvent;
+	
+	ButEvent(Settings settings) {
+		this.settings = settings;
+	}
 	
 	// Set Random ButEvents
-	public static void setRandomButEvent() {
+	public void setRandomButEvent() {
 		boolean newEvent = false;
 		
 		while(!newEvent) {
-			ButEvents event = ButEvents.values()[(int)(Math.random()*ButEvents.values().length)];
+			// TODO: this is broken
+			ButEvents event = settings.enabledEvents.get(new Random().nextInt(settings.enabledEvents.size()));
 			
 			if (event != butEvent) {
 				newEvent = true;

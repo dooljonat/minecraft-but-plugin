@@ -7,25 +7,21 @@ import java.util.List;
 import java.util.Random;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.scheduler.BukkitRunnable;
 
 public final class Utils {
 	private static Plugin plugin = Bukkit.getPluginManager().getPlugin("MinecraftBut");
 	
-	private static Random rand = new Random();
 	
 	/* Returns a random number within the specified range */
 	public static int getRandomIntRange(int min, int max) {
@@ -37,16 +33,28 @@ public final class Utils {
 		return ((Math.random() * (max - min)) + min);
 	}
 		
-	/* Function to spawn TNT in a specified location in a specified world
+	/* Function to spawn explosion in a specified location in a specified world */
+	public static void createTNTDestruction(Location loc, World world, float power) {
+		// Set TNT
+		loc.getBlock().setType(Material.TNT);
+				
+		// create delayed explosion
+		Bukkit.getScheduler().runTaskLater(plugin, () -> {
+			loc.getBlock().setType(Material.AIR);
+			world.createExplosion(loc, power, true, true);
+		}, 20L * 3L);
+	}
+	
+	/* Function to spawn explosion in a specified location in a specified world
 	 * that damages entities but does not destroy blocks */
-	public static void createTNTnoDestruction(Location loc, World world) {
+	public static void createTNTnoDestruction(Location loc, World world, float power) {
 		// Set TNT
 		loc.getBlock().setType(Material.TNT);
 		
 		// create delayed explosion
 		Bukkit.getScheduler().runTaskLater(plugin, () -> {
 			loc.getBlock().setType(Material.AIR);
-		    world.createExplosion(loc, 2.5f, false, false);
+		    world.createExplosion(loc, power, false, false);
 		}, 20L * 3L);
 	}
 	

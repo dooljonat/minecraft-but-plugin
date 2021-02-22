@@ -1,53 +1,63 @@
 package com.spelinchanp.minecraftBut;
 
-import java.lang.Math;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitTask;
 
 public class MinecraftBut extends JavaPlugin {
-	private static Plugin plugin;
-	private static ButEvent butEvent;
+	private Plugin plugin;
+	
+	private Settings settings;
+	private ButEvent but;
 
 	@Override
 	public void onEnable() {
-		Bukkit.broadcastMessage("'Minecraft, but' has been enabled!");
-
-		MinecraftBut();
+		// Set the plugin
+		this.plugin = this;
+		
+		// Set the default plugin
+		plugin.saveDefaultConfig();
+		
+		// Set the settings
+		settings = new Settings(plugin);
+		settings.read();
+		
+		//settings = new Settings(this.plugin);
+		// Set the event manager
+		but = new ButEvent(settings);
+		
+		run();
 	}
 
 	@Override
-	public void onDisable() {
+	public void onDisable() {		
 	}
 
-	public void MinecraftBut() {
-		// Set the plugin
-		plugin = this;
-		
+	public void run() {
 		// Register the event listener
-		getServer().getPluginManager().registerEvents(new MinecraftButListener(), this);
+		getServer().getPluginManager().registerEvents(new MinecraftButListener(but), this);
 		
-
+		// Instantiate MinecraftEvent
+		MinecraftEvent event = new MinecraftEvent(plugin, settings);	
+		
 		// Select a new MinecraftButEvent every five minutes
 		Bukkit.getScheduler()
-			.scheduleSyncRepeatingTask(Bukkit.getPluginManager().getPlugin("MinecraftBut"),
+			.scheduleSyncRepeatingTask(
+					plugin,
 				new Runnable() {
 					@Override
 					public void run() {
 						// Randomly select a new event
-						ButEvent.setRandomButEvent(); 
-						//ButEvent.butEvent = ButEvents.GravitizedLeaves;
+						but.setRandomButEvent(); 
+						//but.butEvent = ButEvents.MobsStacked;
 						
-						// Instantiate MinecraftEvent
+						// run MinecraftEvent
 						// (all other listener-based events are run in MinecraftButListener)
-						MinecraftEvent event = new MinecraftEvent(plugin, ButEvent.butEvent);	
-						
-						//Bukkit.broadcastMessage(ButEvent.butEvent.toString());
+						event.run(but.butEvent);
 
-						switch (ButEvent.butEvent) {
+						switch (but.butEvent) {
 						case TntRain:		
 							Bukkit.broadcastMessage(
 									ChatColor.RED + "TNT Rain has commenced! TNT will drop every ten seconds! Slap on some leather boots to become immune!");

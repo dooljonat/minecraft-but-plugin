@@ -2,7 +2,6 @@ package com.spelinchanp.minecraftBut;
 
 import java.util.Random;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -11,16 +10,12 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.CreatureSpawner;
 import org.bukkit.entity.Egg;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
-import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
-import org.bukkit.event.player.PlayerEggThrowEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
@@ -28,7 +23,11 @@ import org.bukkit.inventory.ItemStack;
 
 
 public class MinecraftButListener implements Listener {
-	public static int timer;
+	public ButEvent but;
+	
+	MinecraftButListener(ButEvent but) {
+		this.but = but;
+	}
 	
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent event) {
@@ -37,7 +36,7 @@ public class MinecraftButListener implements Listener {
 	
 	@EventHandler
 	public void RandomBlocksWalking(PlayerMoveEvent e ) {
-		if (ButEvent.butEvent == ButEvents.RandomBlocksWalking) {
+		if (but.butEvent == ButEvents.RandomBlocksWalking) {
 			Player player = e.getPlayer();
 			Block block = player.getLocation().getBlock().getRelative(BlockFace.DOWN);
 			
@@ -65,19 +64,19 @@ public class MinecraftButListener implements Listener {
 	
 	@EventHandler 
 	public void EndermiteInfestedBlocks(BlockBreakEvent e) {
-		if (ButEvent.butEvent == ButEvents.EndermiteInfestedBlocks) {
+		if (but.butEvent == ButEvents.EndermiteInfestedBlocks) {
 			Block block = e.getBlock();
 			
 			World world = block.getWorld();
 			Location loc = block.getLocation();
 			
-			Entity newEntity = world.spawnEntity(loc, EntityType.ENDERMITE);
+			world.spawnEntity(loc, EntityType.ENDERMITE);
 		}
 	}
 	
 	@EventHandler
 	public void GlassSkyWalker(PlayerMoveEvent e ) {
-		if (ButEvent.butEvent == ButEvents.GlassSkyWalker) {
+		if (but.butEvent == ButEvents.GlassSkyWalker) {
 			Player player = e.getPlayer();
 			Block block = player.getLocation().getBlock().getRelative(BlockFace.DOWN);
 			
@@ -96,7 +95,7 @@ public class MinecraftButListener implements Listener {
 	
 	@EventHandler
 	public void EggsOP(ProjectileHitEvent e) {
-		if (ButEvent.butEvent == ButEvents.EggsOP) {
+		if (but.butEvent == ButEvents.EggsOP) {
 			if (e.getEntity() instanceof Egg) {
 				Egg egg = (Egg) e.getEntity();
 				Block block = egg.getLocation().getBlock();
@@ -107,9 +106,6 @@ public class MinecraftButListener implements Listener {
 					ItemStack item = LootGenerator.randomLuckyFishingItem();
 					loc.getWorld().dropItem(loc, 
 								item);
-					
-					timer++;
-					Bukkit.broadcastMessage(String.valueOf(timer));
 				}
 			}
 		}
