@@ -28,8 +28,8 @@ public class TntRain {
 	
 	private void run() {
 		tntRainRunnable = tntRain;
-		tntRainRunnable.runTaskTimer(plugin, 0, 20 *
-				30/settings.tntRainSpawnRate);
+		tntRainRunnable.runTaskTimer(plugin, 0, (long) (20 *
+				Math.floor(30/settings.tntRainSpawnRate)));
 	}
 	
 	private BukkitRunnable tntRainRunnable = null;

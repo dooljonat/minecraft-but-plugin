@@ -13,7 +13,7 @@ enabled:
 # settings related to the timing and execution of events
 timer:
   # how many are active at a given point
-  how-many-active: 1
+  how-many-active: 3
   # how often the timer runs to switch the events (in seconds)
   how-often-change: 30
   # how many change every time the timer switches
@@ -26,10 +26,10 @@ tnt-rain:
   # how often tnt spawns at the player every timer run
   spawn-rate: 3
   # power of explosion
-  power: 2.5
+  power: 5
 random-enchants:
-  level-cap: 100
+  level-cap: 10
 mobs-stacked:
   min-mobs: 3
-  max-mobs: 25
+  max-mobs: 15
 
