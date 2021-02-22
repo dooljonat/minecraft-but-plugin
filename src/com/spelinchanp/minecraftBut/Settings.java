@@ -33,10 +33,14 @@ public class Settings {
 	public int howOftenChange;
 	
 	// event-specific settings	
+	public boolean tntLeatherBootsImmune;
+	public boolean tntLeatherBootsWeakend;
 	public boolean tntRainGriefBlocks;
 	public int tntRainSpawnRate;
 	public double tntPower;
+	
 	public int randomEnchantsLevelCap;
+	
 	public int mobsStackedMin;
 	public int mobsStackedMax;
 	
@@ -59,6 +63,8 @@ public class Settings {
 		this.howOftenChange = plugin.getConfig().getInt("timer.how-often-change");
 		
 		// event-specific settings
+		this.tntLeatherBootsImmune = plugin.getConfig().getBoolean("tnt-rain.leather-boots-immune");
+		this.tntLeatherBootsWeakend = plugin.getConfig().getBoolean("tnt-rain.leather-boots-weakened");
 		this.tntRainGriefBlocks = plugin.getConfig().getBoolean("tnt-rain.grief");
 		this.tntRainSpawnRate = plugin.getConfig().getInt("tnt-rain.spawn-rate");
 		this.tntPower = plugin.getConfig().getDouble("tnt-rain.power");

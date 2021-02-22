@@ -21,6 +21,12 @@ timer:
 
 # event-specific settings
 tnt-rain:
+  # leather boots immune makes players wearing leather boots immune
+  # to tnt rain, leather boots weakened cuts the
+  # default explosion power in half.
+  # only have one of these set to true.
+  leather-boots-immune: false
+  leather-boots-weakened: true
   # set to false if you don't want tnt to damage blocks
   grief: false 
   # how often tnt spawns at the player every timer run
