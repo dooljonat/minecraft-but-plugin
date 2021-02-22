@@ -41,7 +41,6 @@ public class RandomEnchants {
 			// and enchant it
 			int levelCap = settings.randomEnchantsLevelCap;
 			
-			Bukkit.broadcastMessage(ChatColor.BLUE + "Abra cadabra!");
 			List<Player> players = new ArrayList<>(Bukkit.getOnlinePlayers());
 				
 			for (int i = 0; i < players.size(); i++) {
@@ -68,7 +67,6 @@ public class RandomEnchants {
 					ItemStack newItem;
 					if (item.containsEnchantment(Enchantment.LOOT_BONUS_BLOCKS) 
 							&& newEnchant == Enchantment.SILK_TOUCH) {
-						Bukkit.broadcastMessage("FORTUNE");
 						
 						newItem = Utils.addOrStackEnchantment(item, 
 								Enchantment.LOOT_BONUS_BLOCKS, 
@@ -77,7 +75,6 @@ public class RandomEnchants {
 					}
 					else if (item.containsEnchantment(Enchantment.SILK_TOUCH) 
 							&& newEnchant == Enchantment.LOOT_BONUS_BLOCKS) {
-						Bukkit.broadcastMessage("SILK TOUCH");
 						
 						newItem = Utils.addOrStackEnchantment(item, 
 								Enchantment.SILK_TOUCH, 
@@ -109,7 +106,7 @@ public class RandomEnchants {
 					//Enchantment newEnchant = Enchantment.SILK_TOUCH;
 					if (item.containsEnchantment(Enchantment.LOOT_BONUS_BLOCKS) 
 							&& newEnchant == Enchantment.SILK_TOUCH) {
-						Bukkit.broadcastMessage("FORTUNE");
+
 						
 						newItem = Utils.addOrStackEnchantment(item, 
 								Enchantment.LOOT_BONUS_BLOCKS, 
@@ -118,7 +115,6 @@ public class RandomEnchants {
 					}
 					else if (item.containsEnchantment(Enchantment.SILK_TOUCH) 
 							&& newEnchant == Enchantment.LOOT_BONUS_BLOCKS) {
-						Bukkit.broadcastMessage("SILK TOUCH");
 						
 						newItem = Utils.addOrStackEnchantment(item, 
 								Enchantment.SILK_TOUCH, 

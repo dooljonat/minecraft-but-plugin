@@ -41,7 +41,6 @@ public class TntRain {
 			// Spawn a tnt block at the players location, 
 			// schedule a delayed task to create an explosion which doesnt damage blocks 
 			// and remove the tnt block 
-			Bukkit.broadcastMessage(ChatColor.RED + "BOOM!");
 			List<Player> players = new ArrayList<>(Bukkit.getOnlinePlayers());
 				
 			for (int i = 0; i < players.size(); i++) {

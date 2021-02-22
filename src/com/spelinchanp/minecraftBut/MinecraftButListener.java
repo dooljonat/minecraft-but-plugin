@@ -36,7 +36,7 @@ public class MinecraftButListener implements Listener {
 	
 	@EventHandler
 	public void RandomBlocksWalking(PlayerMoveEvent e ) {
-		if (but.butEvent == ButEvents.RandomBlocksWalking) {
+		if (but.butEvents.contains(ButEvents.RandomBlocksWalking)) {
 			Player player = e.getPlayer();
 			Block block = player.getLocation().getBlock().getRelative(BlockFace.DOWN);
 			
@@ -64,7 +64,7 @@ public class MinecraftButListener implements Listener {
 	
 	@EventHandler 
 	public void EndermiteInfestedBlocks(BlockBreakEvent e) {
-		if (but.butEvent == ButEvents.EndermiteInfestedBlocks) {
+		if (but.butEvents.contains(ButEvents.EndermiteInfestedBlocks)) {
 			Block block = e.getBlock();
 			
 			World world = block.getWorld();
@@ -76,7 +76,7 @@ public class MinecraftButListener implements Listener {
 	
 	@EventHandler
 	public void GlassSkyWalker(PlayerMoveEvent e ) {
-		if (but.butEvent == ButEvents.GlassSkyWalker) {
+		if (but.butEvents.contains(ButEvents.GlassSkyWalker)) {
 			Player player = e.getPlayer();
 			Block block = player.getLocation().getBlock().getRelative(BlockFace.DOWN);
 			
@@ -95,7 +95,7 @@ public class MinecraftButListener implements Listener {
 	
 	@EventHandler
 	public void EggsOP(ProjectileHitEvent e) {
-		if (but.butEvent == ButEvents.EggsOP) {
+		if (but.butEvents.contains(ButEvents.EggsOP)) {
 			if (e.getEntity() instanceof Egg) {
 				Egg egg = (Egg) e.getEntity();
 				Block block = egg.getLocation().getBlock();

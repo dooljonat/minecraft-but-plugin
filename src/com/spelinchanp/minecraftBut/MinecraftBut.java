@@ -50,46 +50,48 @@ public class MinecraftBut extends JavaPlugin {
 					@Override
 					public void run() {
 						// Randomly select a new event
-						but.setRandomButEvent(); 
+						but.setRandomButEvents(); 
 						//but.butEvent = ButEvents.MobsStacked;
 						
 						// run MinecraftEvent
 						// (all other listener-based events are run in MinecraftButListener)
-						event.run(but.butEvent);
-
-						switch (but.butEvent) {
-						case TntRain:		
-							Bukkit.broadcastMessage(
-									ChatColor.RED + "TNT Rain has commenced! TNT will drop every ten seconds! Slap on some leather boots to become immune!");
-							break;
-						case RandomBlocksWalking:	
-							Bukkit.broadcastMessage(
-									ChatColor.GREEN + "Grass block chaos has commenced! Every grass block you "
-											+ "walk on will change to a random block!");		
-							break;
-						case EggsOP:
-							Bukkit.broadcastMessage(
-									ChatColor.YELLOW + "Thrown eggs will spawn OP items!");		
-							break;
-						case RandomEnchants:
-							Bukkit.broadcastMessage(
-									ChatColor.BLUE + "Random enchants has commenced! A random item in your inventory"
-											+ " will be given a random enchantment every three seconds");
-							break;
-						case MobsStacked:
-							Bukkit.broadcastMessage(
-									ChatColor.DARK_GRAY + "Mob stacking has commenced! "
-											+ "Every mob has spawns will now be stacked!");
-							break;
-						case GlassSkyWalker:
-							Bukkit.broadcastMessage(
-									ChatColor.WHITE + "Glass sky walker has commenced!");
-							break;
-						case EndermiteInfestedBlocks: 
-							Bukkit.broadcastMessage(ChatColor.GRAY + "Endermite infested blocks has commenced!");
-							break;
-						case GravitizedLeaves:
-							Bukkit.broadcastMessage(ChatColor.GREEN + "Gravitized leaves has commenced!");
+						for (int i = 0; i < but.butEvents.size(); i++) {
+							event.run(but.butEvents.get(i));
+							
+							switch (but.butEvents.get(i)) {
+							case TntRain:		
+								Bukkit.broadcastMessage(
+										ChatColor.RED + "TNT Rain has commenced! TNT will drop every ten seconds! Slap on some leather boots to become immune!");
+								break;
+							case RandomBlocksWalking:	
+								Bukkit.broadcastMessage(
+										ChatColor.GREEN + "Grass block chaos has commenced! Every grass block you "
+												+ "walk on will change to a random block!");		
+								break;
+							case EggsOP:
+								Bukkit.broadcastMessage(
+										ChatColor.YELLOW + "Thrown eggs will spawn OP items!");		
+								break;
+							case RandomEnchants:
+								Bukkit.broadcastMessage(
+										ChatColor.BLUE + "Random enchants has commenced! A random item in your inventory"
+												+ " will be given a random enchantment every three seconds");
+								break;
+							case MobsStacked:
+								Bukkit.broadcastMessage(
+										ChatColor.DARK_GRAY + "Mob stacking has commenced! "
+												+ "Every mob has spawns will now be stacked!");
+								break;
+							case GlassSkyWalker:
+								Bukkit.broadcastMessage(
+										ChatColor.WHITE + "Glass sky walker has commenced!");
+								break;
+							case EndermiteInfestedBlocks: 
+								Bukkit.broadcastMessage(ChatColor.GRAY + "Endermite infested blocks has commenced!");
+								break;
+							case GravitizedLeaves:
+								Bukkit.broadcastMessage(ChatColor.GREEN + "Gravitized leaves has commenced!");
+							}
 						}
 					}
 				}, 1, 20 * 30);
