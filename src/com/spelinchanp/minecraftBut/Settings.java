@@ -3,8 +3,6 @@ package com.spelinchanp.minecraftBut;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.bukkit.Bukkit;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.Plugin;
 
 public class Settings {
@@ -40,6 +38,7 @@ public class Settings {
 	// event-specific settings	
 	public boolean tntRainGriefBlocks;
 	public int tntRainSpawnRate;
+	public double tntPower;
 	public int randomEnchantsLevelCap;
 	
 	public void read() {
@@ -64,6 +63,8 @@ public class Settings {
 		// event-specific settings
 		this.tntRainGriefBlocks = plugin.getConfig().getBoolean("tnt-rain.grief");
 		this.tntRainSpawnRate = plugin.getConfig().getInt("tnt-rain.spawn-rate");
+		this.tntPower = plugin.getConfig().getDouble("tnt-rain.power");
+		System.out.println("TNT POWER: " + this.tntPower);
 		
 		this.randomEnchantsLevelCap = Integer.parseInt(plugin.getConfig().getString("random-enchants.level-cap"));
 		this.randomEnchantsLevelCap = plugin.getConfig().getInt("random-enchants.level-cap");

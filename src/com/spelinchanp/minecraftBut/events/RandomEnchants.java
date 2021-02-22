@@ -13,13 +13,16 @@ import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import com.spelinchanp.minecraftBut.Settings;
 import com.spelinchanp.minecraftBut.Utils;
 
 public class RandomEnchants {
 	private Plugin plugin;
+	private Settings settings;
 	
-	public RandomEnchants(Plugin plugin) {
+	public RandomEnchants(Plugin plugin, Settings settings) {
 		this.plugin = plugin;
+		this.settings = settings;
 		
 		run();
 	}
@@ -36,6 +39,8 @@ public class RandomEnchants {
 		public void run() {
 			// Select a random item from the player's inventory
 			// and enchant it
+			int levelCap = settings.randomEnchantsLevelCap;
+			
 			Bukkit.broadcastMessage(ChatColor.BLUE + "Abra cadabra!");
 			List<Player> players = new ArrayList<>(Bukkit.getOnlinePlayers());
 				
@@ -68,7 +73,7 @@ public class RandomEnchants {
 						newItem = Utils.addOrStackEnchantment(item, 
 								Enchantment.LOOT_BONUS_BLOCKS, 
 								item.getEnchantmentLevel(Enchantment.LOOT_BONUS_BLOCKS), 
-								100);
+								levelCap);
 					}
 					else if (item.containsEnchantment(Enchantment.SILK_TOUCH) 
 							&& newEnchant == Enchantment.LOOT_BONUS_BLOCKS) {
@@ -77,13 +82,13 @@ public class RandomEnchants {
 						newItem = Utils.addOrStackEnchantment(item, 
 								Enchantment.SILK_TOUCH, 
 								item.getEnchantmentLevel(Enchantment.SILK_TOUCH), 
-								100);
+								levelCap);
 					}
 					else {
 						newItem = Utils.addOrStackEnchantment(item, 
 								newEnchant, 
 								item.getEnchantmentLevel(newEnchant), 
-								100);
+								levelCap);
 					}
 					if (Utils.isHelmet(newItem))
 						inventory.setHelmet(newItem);
@@ -109,7 +114,7 @@ public class RandomEnchants {
 						newItem = Utils.addOrStackEnchantment(item, 
 								Enchantment.LOOT_BONUS_BLOCKS, 
 								item.getEnchantmentLevel(Enchantment.LOOT_BONUS_BLOCKS), 
-								100);
+								levelCap);
 					}
 					else if (item.containsEnchantment(Enchantment.SILK_TOUCH) 
 							&& newEnchant == Enchantment.LOOT_BONUS_BLOCKS) {
@@ -118,13 +123,13 @@ public class RandomEnchants {
 						newItem = Utils.addOrStackEnchantment(item, 
 								Enchantment.SILK_TOUCH, 
 								item.getEnchantmentLevel(Enchantment.SILK_TOUCH), 
-								100);
+								levelCap);
 					}
 					else {
 						newItem = Utils.addOrStackEnchantment(item, 
 								newEnchant, 
 								item.getEnchantmentLevel(newEnchant), 
-								100);
+								levelCap);
 					}
 					
 						

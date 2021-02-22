@@ -12,20 +12,24 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import com.spelinchanp.minecraftBut.Settings;
 import com.spelinchanp.minecraftBut.Utils;
 
 public class TntRain {
 	private Plugin plugin;
+	private Settings settings;
 	
-	public TntRain(Plugin plugin) {
+	public TntRain(Plugin plugin, Settings settings) {
 		this.plugin = plugin;
+		this.settings = settings;
 		
 		run();
 	}
 	
 	private void run() {
 		tntRainRunnable = tntRain;
-		tntRainRunnable.runTaskTimer(plugin, 0, 20*10);
+		tntRainRunnable.runTaskTimer(plugin, 0, 20 *
+				30/settings.tntRainSpawnRate);
 	}
 	
 	private BukkitRunnable tntRainRunnable = null;
@@ -45,7 +49,12 @@ public class TntRain {
 				if (!Utils.hasArmorType(players.get(i).getInventory().getBoots(), Material.LEATHER_BOOTS)) {
 					Location loc = players.get(i).getLocation();
 					World world = players.get(i).getWorld();
-					Utils.createTNTnoDestruction(loc, world);
+					
+					// if tnt-rain.grief is set to false, spawn not block damaging tnt
+					if (settings.tntRainGriefBlocks) 
+						Utils.createTNTDestruction(loc, world, (float)settings.tntPower);
+					else 
+						Utils.createTNTnoDestruction(loc, world, (float)settings.tntPower);
 				}
 			}		
 			timesRun++;

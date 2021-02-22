@@ -3,7 +3,6 @@ package com.spelinchanp.minecraftBut;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -41,7 +40,7 @@ public class MinecraftBut extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new MinecraftButListener(but), this);
 		
 		// Instantiate MinecraftEvent
-		MinecraftEvent event = new MinecraftEvent(plugin);	
+		MinecraftEvent event = new MinecraftEvent(plugin, settings);	
 		
 		// Select a new MinecraftButEvent every five minutes
 		Bukkit.getScheduler()
@@ -51,8 +50,8 @@ public class MinecraftBut extends JavaPlugin {
 					@Override
 					public void run() {
 						// Randomly select a new event
-						but.setRandomButEvent(); 
-						//but.butEvent = ButEvents.TntRain;
+						//but.setRandomButEvent(); 
+						but.butEvent = ButEvents.RandomEnchants;
 						
 						// run MinecraftEvent
 						// (all other listener-based events are run in MinecraftButListener)

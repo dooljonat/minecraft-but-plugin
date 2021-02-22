@@ -33,16 +33,28 @@ public final class Utils {
 		return ((Math.random() * (max - min)) + min);
 	}
 		
-	/* Function to spawn TNT in a specified location in a specified world
+	/* Function to spawn explosion in a specified location in a specified world */
+	public static void createTNTDestruction(Location loc, World world, float power) {
+		// Set TNT
+		loc.getBlock().setType(Material.TNT);
+				
+		// create delayed explosion
+		Bukkit.getScheduler().runTaskLater(plugin, () -> {
+			loc.getBlock().setType(Material.AIR);
+			world.createExplosion(loc, power, true, true);
+		}, 20L * 3L);
+	}
+	
+	/* Function to spawn explosion in a specified location in a specified world
 	 * that damages entities but does not destroy blocks */
-	public static void createTNTnoDestruction(Location loc, World world) {
+	public static void createTNTnoDestruction(Location loc, World world, float power) {
 		// Set TNT
 		loc.getBlock().setType(Material.TNT);
 		
 		// create delayed explosion
 		Bukkit.getScheduler().runTaskLater(plugin, () -> {
 			loc.getBlock().setType(Material.AIR);
-		    world.createExplosion(loc, 2.5f, false, false);
+		    world.createExplosion(loc, power, false, false);
 		}, 20L * 3L);
 	}
 	
