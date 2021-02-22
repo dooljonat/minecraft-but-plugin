@@ -17,7 +17,7 @@ public class ButEvent {
 		
 		while(!newEvent) {
 			// TODO: this is broken
-			ButEvents event = ButEvents.values()[new Random().nextInt(ButEvents.values().length)];
+			ButEvents event = settings.enabledEvents.get(new Random().nextInt(settings.enabledEvents.size()));
 			
 			if (event != butEvent) {
 				newEvent = true;

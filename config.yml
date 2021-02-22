@@ -1,7 +1,7 @@
 # enable and disable certain events
 enabled:
   tnt-rain: true
-  eggs-op: false
+  eggs-op: true
   random-enchants: true
   mobs-stacked: true
   random-blocks-walking: true

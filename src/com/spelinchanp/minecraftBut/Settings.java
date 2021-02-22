@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.Plugin;
 
 public class Settings {
@@ -43,26 +44,29 @@ public class Settings {
 	
 	public void read() {
 		// load enabled events
-		tntRainEnabled = Boolean.parseBoolean(plugin.getConfig().getString("enabled.tnt-rain"));
-		eggsOPEnabled = Boolean.parseBoolean(plugin.getConfig().getString("enabled.eggs-op"));
-		randomEnchantsEnabled = Boolean.parseBoolean(plugin.getConfig().getString("enabled.random-enchants"));
-		mobsStackedEnabled = Boolean.parseBoolean(plugin.getConfig().getString("enabled.mobs-stacked"));
-		randomBlocksWalkingEnabled = Boolean.parseBoolean(plugin.getConfig().getString("enabled.random-blocks-walking"));
-		glassSkyWalkerEnabled = Boolean.parseBoolean(plugin.getConfig().getString("enabled.glass-sky-walker"));
-		endermiteInfestedBlocksEnabled = Boolean.parseBoolean(plugin.getConfig().getString("enabled.endermite-infested-blocks"));
-		gravitizedLeavesEnabled = Boolean.parseBoolean(plugin.getConfig().getString("enabled.gravitized-leaves"));
-		enabledEvents = getEnabledEventsList();
+		this.tntRainEnabled = plugin.getConfig().getBoolean("enabled.tnt-rain");
+		this.eggsOPEnabled = plugin.getConfig().getBoolean("enabled.eggs-op");
+		this.randomEnchantsEnabled = plugin.getConfig().getBoolean("enabled.random-enchants");
+		this.mobsStackedEnabled = plugin.getConfig().getBoolean("enabled.mobs-stacked");
+		this.randomBlocksWalkingEnabled = plugin.getConfig().getBoolean("enabled.random-blocks-walking");
+		this.glassSkyWalkerEnabled = plugin.getConfig().getBoolean("enabled.glass-sky-walker");
+		this.endermiteInfestedBlocksEnabled = plugin.getConfig().getBoolean("enabled.endermite-infested-blocks");
+		this.gravitizedLeavesEnabled = plugin.getConfig().getBoolean("enabled.gravitized-leaves");
+		
+		// create enabled events list
+		this.enabledEvents = getEnabledEventsList();
 		
 		// timer-specific settings
-		howManyActive = Integer.parseInt(plugin.getConfig().getString("timer.how-many-active"));
-		howOftenChange = Integer.parseInt(plugin.getConfig().getString("timer.how-often-change"));
-		howManyChange = Integer.parseInt(plugin.getConfig().getString("timer.how-many-change"));
+		this.howManyActive = plugin.getConfig().getInt("timer.how-many-active");
+		this.howOftenChange = plugin.getConfig().getInt("timer.how-often-change");
+		this.howManyChange = plugin.getConfig().getInt("timer.how-many-change");
 		
 		// event-specific settings
-		tntRainGriefBlocks = Boolean.parseBoolean(plugin.getConfig().getString("tnt-rain.grief"));
-		tntRainSpawnRate = Integer.parseInt(plugin.getConfig().getString("tnt-rain.spawn-rate"));
+		this.tntRainGriefBlocks = plugin.getConfig().getBoolean("tnt-rain.grief");
+		this.tntRainSpawnRate = plugin.getConfig().getInt("tnt-rain.spawn-rate");
 		
-		randomEnchantsLevelCap = Integer.parseInt(plugin.getConfig().getString("random-enchants.level-cap"));
+		this.randomEnchantsLevelCap = Integer.parseInt(plugin.getConfig().getString("random-enchants.level-cap"));
+		this.randomEnchantsLevelCap = plugin.getConfig().getInt("random-enchants.level-cap");
 		
 	}
 	
@@ -87,7 +91,7 @@ public class Settings {
 			enabled.add(ButEvents.GravitizedLeaves);
 		
 		for (int i = 0; i < enabled.size(); i++) {
-			Bukkit.broadcastMessage(enabled.get(i).toString());
+			System.out.println(enabled.get(i).toString());
 		}
 		
 		return enabled;

@@ -39,7 +39,6 @@ public class TntRain {
 			// and remove the tnt block 
 			Bukkit.broadcastMessage(ChatColor.RED + "BOOM!");
 			List<Player> players = new ArrayList<>(Bukkit.getOnlinePlayers());
-			Bukkit.broadcastMessage(players.get(0).getName());
 				
 			for (int i = 0; i < players.size(); i++) {
 				// if player isn't wearing leather boots, set TNT block

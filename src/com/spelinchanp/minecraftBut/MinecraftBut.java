@@ -3,6 +3,7 @@ package com.spelinchanp.minecraftBut;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -17,12 +18,16 @@ public class MinecraftBut extends JavaPlugin {
 		// Set the plugin
 		this.plugin = this;
 		
+		// Set the default plugin
+		plugin.saveDefaultConfig();
+		
 		// Set the settings
-		settings = new Settings(this.plugin);
+		settings = new Settings(plugin);
+		settings.read();
+		
+		//settings = new Settings(this.plugin);
 		// Set the event manager
 		but = new ButEvent(settings);
-		
-		plugin.saveDefaultConfig();
 		
 		run();
 	}
@@ -32,9 +37,6 @@ public class MinecraftBut extends JavaPlugin {
 	}
 
 	public void run() {
-		// TODO: MAKE EVERYTHING NOT STATIC
-		
-		
 		// Register the event listener
 		getServer().getPluginManager().registerEvents(new MinecraftButListener(but), this);
 		
