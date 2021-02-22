@@ -28,8 +28,8 @@ public class TntRain {
 	
 	private void run() {
 		tntRainRunnable = tntRain;
-		tntRainRunnable.runTaskTimer(plugin, 0, 20 *
-				30/settings.tntRainSpawnRate);
+		tntRainRunnable.runTaskTimer(plugin, 0, (long) (20 *
+				Math.floor(30/settings.tntRainSpawnRate)));
 	}
 	
 	private BukkitRunnable tntRainRunnable = null;
@@ -41,7 +41,6 @@ public class TntRain {
 			// Spawn a tnt block at the players location, 
 			// schedule a delayed task to create an explosion which doesnt damage blocks 
 			// and remove the tnt block 
-			Bukkit.broadcastMessage(ChatColor.RED + "BOOM!");
 			List<Player> players = new ArrayList<>(Bukkit.getOnlinePlayers());
 				
 			for (int i = 0; i < players.size(); i++) {

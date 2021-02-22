@@ -29,9 +29,6 @@ public class Settings {
 	// how many events active at a time
 	public int howManyActive;
 	
-	// how many to change every time they change
-	public int howManyChange;
-	
 	// how often they change
 	public int howOftenChange;
 	
@@ -60,7 +57,6 @@ public class Settings {
 		// timer-specific settings
 		this.howManyActive = plugin.getConfig().getInt("timer.how-many-active");
 		this.howOftenChange = plugin.getConfig().getInt("timer.how-often-change");
-		this.howManyChange = plugin.getConfig().getInt("timer.how-many-change");
 		
 		// event-specific settings
 		this.tntRainGriefBlocks = plugin.getConfig().getBoolean("tnt-rain.grief");

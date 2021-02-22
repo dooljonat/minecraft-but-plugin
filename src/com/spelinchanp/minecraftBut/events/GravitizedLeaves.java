@@ -35,7 +35,6 @@ public class GravitizedLeaves {
 		
 		@Override
 		public void run() {
-			Bukkit.broadcastMessage(ChatColor.GREEN + "Gravitized leaves!");
 			// Gravitize all the leaves around the player every three seconds
 			
 			List<Player> players = new ArrayList<>(Bukkit.getOnlinePlayers());
