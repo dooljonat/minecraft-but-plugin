@@ -40,6 +40,8 @@ public class Settings {
 	public int tntRainSpawnRate;
 	public double tntPower;
 	public int randomEnchantsLevelCap;
+	public int mobsStackedMin;
+	public int mobsStackedMax;
 	
 	public void read() {
 		// load enabled events
@@ -64,10 +66,11 @@ public class Settings {
 		this.tntRainGriefBlocks = plugin.getConfig().getBoolean("tnt-rain.grief");
 		this.tntRainSpawnRate = plugin.getConfig().getInt("tnt-rain.spawn-rate");
 		this.tntPower = plugin.getConfig().getDouble("tnt-rain.power");
-		System.out.println("TNT POWER: " + this.tntPower);
 		
-		this.randomEnchantsLevelCap = Integer.parseInt(plugin.getConfig().getString("random-enchants.level-cap"));
 		this.randomEnchantsLevelCap = plugin.getConfig().getInt("random-enchants.level-cap");
+		
+		this.mobsStackedMin = plugin.getConfig().getInt("mobs-stacked.min-mobs");
+		this.mobsStackedMax = plugin.getConfig().getInt("mobs-stacked.max-mobs");
 		
 	}
 	

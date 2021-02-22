@@ -50,8 +50,8 @@ public class MinecraftBut extends JavaPlugin {
 					@Override
 					public void run() {
 						// Randomly select a new event
-						//but.setRandomButEvent(); 
-						but.butEvent = ButEvents.RandomEnchants;
+						but.setRandomButEvent(); 
+						//but.butEvent = ButEvents.MobsStacked;
 						
 						// run MinecraftEvent
 						// (all other listener-based events are run in MinecraftButListener)

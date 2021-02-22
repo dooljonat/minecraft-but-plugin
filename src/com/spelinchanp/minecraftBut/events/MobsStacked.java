@@ -12,13 +12,16 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import com.spelinchanp.minecraftBut.Settings;
 import com.spelinchanp.minecraftBut.Utils;
 
 public class MobsStacked {
 	private Plugin plugin;
+	private Settings settings;
 	
-	public MobsStacked(Plugin plugin) {
+	public MobsStacked(Plugin plugin, Settings settings) {
 		this.plugin = plugin;
+		this.settings = settings;
 		
 		run();
 	}
@@ -50,7 +53,7 @@ public class MobsStacked {
 						entity.setCustomName("Stacked");
 						
 						// fix it so that it adds to the stack, not adds multiple entities to second layer
-						int numToStack = Utils.getRandomIntRange(3, 15);
+						int numToStack = Utils.getRandomIntRange(settings.mobsStackedMin, settings.mobsStackedMax);
 						Utils.addPassengers(entity, numToStack);
 					}
 				}

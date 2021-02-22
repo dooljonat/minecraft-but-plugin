@@ -2,6 +2,8 @@ package com.spelinchanp.minecraftBut;
 
 import org.bukkit.plugin.Plugin;
 
+import com.spelinchanp.minecraftBut.events.GravitizedLeaves;
+import com.spelinchanp.minecraftBut.events.MobsStacked;
 import com.spelinchanp.minecraftBut.events.RandomEnchants;
 import com.spelinchanp.minecraftBut.events.TntRain;
 
@@ -23,15 +25,14 @@ public class MinecraftEvent {
 		if (event == ButEvents.TntRain) {
 			TntRain e = new TntRain(plugin, settings);
 		}
-		//TODO: apply settings for these
 		else if (event == ButEvents.RandomEnchants) {
 			RandomEnchants e = new RandomEnchants(plugin, settings);
 		}
-//		else if (event == ButEvents.MobsStacked) {
-//			MobsStacked e = new MobsStacked(plugin, settings);
-//		}
-//		else if (event == ButEvents.GravitizedLeaves) {
-//			GravitizedLeaves e = new GravitizedLeaves(plugin, settings);
-//		}
+		else if (event == ButEvents.MobsStacked) {
+			MobsStacked e = new MobsStacked(plugin, settings);
+		}
+		else if (event == ButEvents.GravitizedLeaves) {
+			GravitizedLeaves e = new GravitizedLeaves(plugin);
+		}
 	}	
 }
